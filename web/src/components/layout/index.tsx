@@ -28,7 +28,7 @@ const Header: FC = () => {
 const Footer: FC = () => {
   return (
     <footer className="absolute bottom-0 z-[1] flex h-24 w-full flex-col items-center justify-center gap-4 bg-yellow-600 md:flex-row lg:gap-8 lg:p-10">
-      <Link className="group flex flex-row items-center gap-2" href="shuesnyder@gmail.com">
+      <Link className="group flex flex-row items-center gap-2" href="mailto:shuesnyder@gmail.com">
         <MdOutlineMailOutline className="h-6 w-6 text-white group-hover:text-yellow-800 md:h-8 md:w-8" />
         <span className="text-white group-hover:text-yellow-800">shuesnyder@gmail.com</span>
       </Link>
