@@ -12,7 +12,7 @@ import { useState } from "react"
 const title = `Shue's Portfolio`
 const traditionalImages = images.filter((x) => x.medium !== Medium.TWOD && x.medium !== Medium.THREED)
 const digitalImages = images.filter((x) => x.medium === Medium.TWOD || x.medium === Medium.THREED)
-const traditionalFilters = [Medium.OIL]
+const traditionalFilters = [Medium.OIL, Medium.CHARCOAL]
 
 function scrollToElement(id: string) {
   const element = document.getElementById(id)
