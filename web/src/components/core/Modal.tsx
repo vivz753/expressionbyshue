@@ -15,7 +15,7 @@ interface ModalProps {
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, onNext, children, image }, ref) => {
   return (
-    <div className={clsx("fixed top-0 h-full w-screen justify-center", show ? "flex" : "hidden")}>
+    <div className={clsx("fixed top-0 z-[100] h-full w-screen justify-center", show ? "flex" : "hidden")}>
       <div className="relative flex h-full w-full items-center justify-center">
         <div
           onClick={() => {
@@ -34,7 +34,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, o
             </div>
             <button
               onClick={() => onPrev()}
-              className="absolute left-2 m-4 flex h-4 w-4 min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-4 lg:left-32 lg:h-8 lg:w-8 lg:p-8"
+              className="absolute left-2 m-4 flex shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
             >
               <span className="w-full cursor-pointer text-white">
                 <ChevronLeftIcon className="size-10 text-white" />
@@ -42,7 +42,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, o
             </button>
             <button
               onClick={onClose}
-              className="absolute top-8 flex h-4 w-4 min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-4 lg:top-24 lg:-mt-5 lg:h-8 lg:w-8 lg:p-6"
+              className="absolute top-8 flex min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
             >
               <span className="w-full cursor-pointer text-white">
                 <XMarkIcon className="size-8 text-white" />
@@ -50,7 +50,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, o
             </button>
             <button
               onClick={() => onNext()}
-              className="absolute right-2 m-4 flex h-4 w-4 min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-4 lg:right-32 lg:h-8 lg:w-8 lg:p-8"
+              className="absolute right-2 m-4 flex min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
             >
               <span className="w-full cursor-pointer text-white">
                 <ChevronRightIcon className="size-10 text-white" />
