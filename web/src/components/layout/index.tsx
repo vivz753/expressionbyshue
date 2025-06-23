@@ -32,7 +32,7 @@ const Footer: FC = () => {
         <MdOutlineMailOutline className="h-6 w-6 text-white group-hover:text-yellow-800 md:h-8 md:w-8" />
         <span className="text-white group-hover:text-yellow-800">shuesnyder@gmail.com</span>
       </Link>
-      <Link className="flex group flex-row items-center gap-2" href="https://instagram.com/">
+      <Link className="group flex flex-row items-center gap-2" href="https://instagram.com/">
         <FaInstagram className="h-6 w-6 text-white group-hover:text-yellow-800 md:h-8 md:w-8" />
         <span className="text-white group-hover:text-yellow-800"></span>
       </Link>
@@ -42,7 +42,7 @@ const Footer: FC = () => {
 
 const Layout: FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <div className="relative flex w-full flex-col overflow-auto">
+    <div className="relative flex w-full flex-col">
       <Header />
       <Footer />
       <div className="flex h-full min-h-screen">{children}</div>
