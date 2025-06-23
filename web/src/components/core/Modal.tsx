@@ -2,6 +2,7 @@ import { forwardRef } from "react"
 import clsx from "clsx"
 import Image from "next/image"
 import { Art } from "@schemas/global"
+import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/solid"
 
 interface ModalProps {
   show: boolean
@@ -35,19 +36,25 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, o
               onClick={() => onPrev()}
               className="absolute left-2 m-4 flex h-4 w-4 min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-4 lg:left-32 lg:h-8 lg:w-8 lg:p-8"
             >
-              <span className="w-full cursor-pointer text-white">{`< prev`}</span>
+              <span className="w-full cursor-pointer text-white">
+                <ChevronLeftIcon className="size-10 text-white" />
+              </span>
             </button>
             <button
               onClick={onClose}
-              className="absolute top-8 flex h-4 w-4 min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-4 lg:top-24 lg:-mt-5 lg:h-8 lg:w-8 lg:p-8"
+              className="absolute top-8 flex h-4 w-4 min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-4 lg:top-24 lg:-mt-5 lg:h-8 lg:w-8 lg:p-6"
             >
-              <span className="w-full cursor-pointer text-white">X close</span>
+              <span className="w-full cursor-pointer text-white">
+                <XMarkIcon className="size-8 text-white" />
+              </span>
             </button>
             <button
               onClick={() => onNext()}
               className="absolute right-2 m-4 flex h-4 w-4 min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-4 lg:right-32 lg:h-8 lg:w-8 lg:p-8"
             >
-              <span className="w-full cursor-pointer text-white">{`next >`}</span>
+              <span className="w-full cursor-pointer text-white">
+                <ChevronRightIcon className="size-10 text-white" />
+              </span>
             </button>
           </div>
         </div>
