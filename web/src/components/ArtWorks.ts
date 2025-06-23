@@ -1,5 +1,21 @@
 import { Medium, Art } from "@schemas/global"
 export const images: Art[] = [
+  
+  {
+    url: "/images/art/portrait-vivianleigh.jpg",
+    medium: Medium.CHARCOAL,
+    title: "portrait in oil",
+  },
+  {
+    url: "/images/art/portrait-redhead.jpg",
+    medium: Medium.OIL,
+    title: "portrait in oil",
+  },
+  {
+    url: "/images/art/portrait-audreyhepburn.JPG",
+    medium: Medium.CHARCOAL,
+    title: "portrait in oil",
+  },
   {
     url: "/images/art/portrait-john-oil.JPG",
     medium: Medium.OIL,
