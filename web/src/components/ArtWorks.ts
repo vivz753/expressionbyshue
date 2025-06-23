@@ -1,9 +1,8 @@
 import { Medium, Art } from "@schemas/global"
 export const images: Art[] = [
-  
   {
     url: "/images/art/portrait-vivianleigh.jpg",
-    medium: Medium.CHARCOAL,
+    medium: Medium.OIL,
     title: "portrait in oil",
   },
   {
@@ -12,97 +11,92 @@ export const images: Art[] = [
     title: "portrait in oil",
   },
   {
-    url: "/images/art/portrait-audreyhepburn.JPG",
+    url: "/images/art/portrait-john-oil.jpg",
+    medium: Medium.OIL,
+    title: "portrait in oil",
+  },
+  {
+    url: "/images/art/portrait-granddaughter.jpg",
+    medium: Medium.OIL,
+    title: "portrait in oil",
+  },
+  {
+    url: "/images/art/teapots-oil.jpg",
+    medium: Medium.OIL,
+    title: "portrait in oil",
+  },
+  {
+    url: "/images/art/portrait-lady-charcoal.jpg",
     medium: Medium.CHARCOAL,
     title: "portrait in oil",
   },
   {
-    url: "/images/art/portrait-john-oil.JPG",
+    url: "/images/art/portrait-andy.jpg",
     medium: Medium.OIL,
     title: "portrait in oil",
   },
   {
-    url: "/images/art/granddaughter-oil.JPEG",
-    medium: Medium.OIL,
-    title: "portrait in oil",
-  },
-  {
-    url: "/images/art/teapots-oil.JPG",
-    medium: Medium.OIL,
-    title: "portrait in oil",
-  },
-  {
-    url: "/images/art/portrait-lady-charcoal.JPG",
-    medium: Medium.CHARCOAL,
-    title: "portrait in oil",
-  },
-  {
-    url: "/images/art/andy.JPEG",
-    medium: Medium.OIL,
-    title: "portrait in oil",
-  },
-  {
-    url: "/images/art/autumn-farm.JPEG",
+    url: "/images/art/autumn-farm.jpg",
     medium: Medium.OIL,
     title: "landscape in oil",
   },
   {
-    url: "/images/art/autumn-leaves.JPEG",
+    url: "/images/art/autumn-leaves.jpg",
     medium: Medium.OIL,
     title: "landscape in oil",
   },
   {
-    url: "/images/art/autumn-path.JPEG",
+    url: "/images/art/autumn-path.jpg",
     medium: Medium.OIL,
     title: "landscape in oil",
   },
   {
-    url: "/images/art/baby-commission.JPEG",
+    url: "/images/art/baby-commission.jpg",
     medium: Medium.OIL,
     title: "portrait in oil",
   },
   {
-    url: "/images/art/buildings.JPEG",
+    url: "/images/art/buildings.jpg",
     medium: Medium.OIL,
     title: "landscape in oil",
   },
   {
-    url: "/images/art/canyon-sunset.JPEG",
+    url: "/images/art/canyon-sunset.jpg",
     medium: Medium.OIL,
     title: "landscape in oil",
   },
   {
-    url: "/images/art/farm-cherry-blossoms.JPEG",
+    url: "/images/art/farm-cherry-blossoms.jpg",
     medium: Medium.OIL,
     title: "portrait in oil",
   },
   {
-    url: "/images/art/portrait-lady-oil.JPEG",
+    url: "/images/art/portrait-lady-oil.jpg",
     medium: Medium.OIL,
     title: "portrait in oil",
   },
   {
-    url: "/images/art/nude-oil.JPEG",
+    url: "/images/art/nude-oil.jpg",
     medium: Medium.OIL,
     title: "figure in oil",
   },
   {
-    url: "/images/art/orange-sunset.JPEG",
+    url: "/images/art/orange-sunset.jpg",
     medium: Medium.OIL,
     title: "landscape in oil",
   },
   {
-    url: "/images/art/portrait-man.JPEG",
+    url: "/images/art/portrait-man.jpg",
     medium: Medium.OIL,
     title: "portrait in oil",
   },
   {
-    url: "/images/art/river-sunset.JPEG",
+    url: "/images/art/river-sunset.jpg",
     medium: Medium.OIL,
     title: "landscape in oil",
   },
   {
-    url: "/images/art/trees-with-dog.JPEG",
+    url: "/images/art/trees-with-dog.jpg",
     medium: Medium.OIL,
     title: "landscape in oil",
   },

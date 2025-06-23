@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 import Rainbow from "../src/components/core/Rainbow"
 
-const About: NextPage = () => {
+const Test: NextPage = () => {
   return (
     <div className="flex h-full min-h-screen w-screen flex-col items-center gap-20 border border-red-500 pb-24 pt-[72px] md:px-12 xl:px-20">
       <div className="flex flex-col items-center justify-center">
@@ -29,4 +29,4 @@ const About: NextPage = () => {
   )
 }
 
-export default About
+export default Test
