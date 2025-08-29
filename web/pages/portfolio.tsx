@@ -61,7 +61,7 @@ const Portfolio: NextPage = () => {
                   scrollToElement(f)
                 }}
                 className={clsx(
-                  f === filter && "outline outline-2 outline-offset-2 outline-yellow-300",
+                  f === filter && "outline-solid outline-2 outline-offset-2 outline-yellow-300",
                   "ml-8 w-56 rounded-md bg-yellow-600 px-4 py-2 text-white hover:bg-yellow-500"
                 )}
               >

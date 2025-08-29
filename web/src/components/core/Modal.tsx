@@ -15,7 +15,7 @@ interface ModalProps {
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, onNext, children, image }, ref) => {
   return (
-    <div className={clsx("fixed top-0 z-[100] h-full w-screen justify-center", show ? "flex" : "hidden")}>
+    <div className={clsx("fixed top-0 z-100 h-full w-screen justify-center", show ? "flex" : "hidden")}>
       <div className="relative flex h-full w-full items-center justify-center">
         <div
           onClick={() => {
