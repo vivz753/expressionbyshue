@@ -37,7 +37,7 @@ const About: NextPage = () => {
           <div className="flex flex-row items-center gap-20">
             <div className="flex flex-col gap-8">
               <p className="whitespace-pre-line text-xl">
-                "Tomorrow is Another Day", Vivien Leigh, Pencil Drawing, May 2025.
+                {`"Tomorrow is Another Day", Vivien Leigh, Pencil Drawing, May 2025.`}
               </p>
               <p className="whitespace-pre-line">{text2}</p>
             </div>
