@@ -12,20 +12,17 @@ const description = `This website reflects an artistic journey that began in chi
 const Home: NextPage = () => {
 
   return (
-    <div className="flex h-full min-h-screen w-screen ">
-      <div className="flex w-full pb-[90px] pt-[90px]">
-        <div className="flex w-full flex-col items-center max-w-full overflow-auto justify-center gap-8 lg:gap-12 p-8 lg:p-12">
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content="Shue's art portfolio" />
+        <link rel="icon" href="/images/rainbows/rainbow-blue-svgrepo-com.svg" />
+      </Head>
+      <div className="flex h-full min-h-screen w-screen pb-[90px] pt-[90px]">
+        <div className="flex w-full flex-col items-center max-w-full justify-center gap-8 lg:gap-12 p-8 lg:p-12">
           <p className="text-xl text-center">Welcome to Expression by Shue, where art, life, and passion emerge!</p>
-          <div className="relative min-h-1/2 lg:min-h-[500px] flex max-w-full min-w-full lg:min-w-[1000px]">
-          <div className="carousel overflow-x-auto w-full h-full flex snap-x snap-mandatory bg-yellow-100">
-            <div className="w-full h-full flex flex-row">
-            <div className="shrink-0 h-full snap-center w-full bg-red-100">carousel placeholder</div>
-            <div className="shrink-0 h-full snap-center w-full bg-blue-100">carousel placeholder</div>
-            <div className="shrink-0 h-full snap-center w-full bg-green-100">carousel placeholder</div>
-            </div>
-          </div>
-          </div>
-          {/* <div className="grid grid-cols-[288px_minmax(300px,500px)] gap-20">
+          <Carousel />
+          <div className="grid place-items-center gap-12 grid-cols-1 lg:grid-cols-[288px_minmax(300px,500px)] lg:gap-20">
             <div className="relative h-72 w-48 overflow-hidden rounded-md xl:h-96 xl:w-72">
               <Image
                 alt={"shue's profile pic"}
@@ -35,16 +32,29 @@ const Home: NextPage = () => {
               />
             </div>
             <p className="flex whitespace-pre-line">{description}</p>
-          </div> */}
+          </div>
         </div>
       </div>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content="Shue's art portfolio" />
-        <link rel="icon" href="/images/rainbows/rainbow-blue-svgrepo-com.svg" />
-      </Head>
-    </div>
+    </>
   )
 }
 
 export default Home
+
+const Carousel = () => (
+  <div className="relative h-full min-h-[50vh] lg:min-h-[500px] flex max-w-full min-w-full lg:min-w-[1000px]">
+    <div className="carousel overflow-x-auto w-full h-full flex snap-x snap-mandatory">
+      <div className="w-full h-full flex flex-row">
+        <div className="snap-center shrink-0 h-full  w-full relative">
+          <Image alt="canyon sunset" src={"/images/art/canyon-sunset.jpg"} fill style={{objectFit: "contain"}} />
+        </div>
+        <div className="snap-center shrink-0 h-full w-full relative">
+          <Image alt="portrait of andy" src={"/images/art/portrait-andy.jpg"} fill style={{objectFit: "contain"}} />
+        </div>
+        <div className="snap-center shrink-0 h-full w-full relative">
+          <Image alt="farm cherry blossoms" src={"/images/art/farm-cherry-blossoms-oil.jpg"} fill style={{objectFit: "contain"}} />
+        </div>
+      </div>
+    </div>
+  </div>
+)
