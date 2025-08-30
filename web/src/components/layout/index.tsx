@@ -17,9 +17,9 @@ const labels: NavigationLink[] = [
 
 const Header: FC = () => {
   return (
-    <header className="absolute top-0 z-1 flex h-[90px] w-full flex-row items-center gap-5 bg-yellow-600 lg:px-8">
+    <header className="absolute top-0 z-1 flex h-[90px] w-full flex-row items-center justify-evenly lg:justify-start lg:gap-8 bg-yellow-600 lg:px-8">
       <Link href="/">
-        <div className="relative h-[100px] w-[250px]">
+        <div className="relative h-[50px] w-[125px] lg:h-[100px] lg:w-[250px]">
           <Image
             alt="Expression by Shue"
             fill
@@ -30,7 +30,7 @@ const Header: FC = () => {
       </Link>
       {labels.map((label, i) => (
         <Link key={i} href={label.url}>
-          <span className="mx-4 rounded-xl text-white hover:text-yellow-900">{label.name}</span>
+          <span className="rounded-xl text-white hover:text-yellow-900">{label.name}</span>
         </Link>
       ))}
     </header>
