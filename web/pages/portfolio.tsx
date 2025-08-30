@@ -43,7 +43,7 @@ const Portfolio: NextPage = () => {
         <meta name="description" content="Oil painter." />
         <link rel="icon" href="/images/rainbows/rainbow-blue-svgrepo-com.svg" />
       </Head>
-      <div className="flex h-full min-h-screen w-full flex-row pb-24 pt-[72px]">
+      <div className="flex h-full min-h-screen w-full flex-row pb-[90px] pt-[90px]">
         {/* Categories */}
         <div className="hidden flex-col sm:w-[320px] lg:flex">
           <div className="sticky top-0 flex flex-col items-center justify-start gap-8 p-20">
