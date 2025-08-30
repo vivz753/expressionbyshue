@@ -51,7 +51,7 @@ export const images: Art[] = [
     title: "landscape in oil",
   },
   {
-    url: "/images/art/baby-commission.jpg",
+    url: "/images/art/portrait-baby-oil.jpg",
     medium: Medium.OIL,
     title: "portrait in oil",
   },
