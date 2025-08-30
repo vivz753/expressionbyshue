@@ -10,15 +10,22 @@ const description = `This website reflects an artistic journey that began in chi
 `
 
 const Home: NextPage = () => {
+
   return (
     <div className="flex h-full min-h-screen w-screen ">
       <div className="flex w-full pb-[90px] pt-[90px]">
-        <div className="flex w-full flex-col items-center justify-center gap-12 p-12">
-          <p className="text-2xl">Welcome to Expression by Shue, where art, life, and passion emerge!</p>
-          <div className="h-[250px] w-[1000px] overflow-auto bg-yellow-100">
-            <div className="flex h-full w-full">carousel placeholder</div>
+        <div className="flex w-full flex-col items-center max-w-full overflow-auto justify-center gap-8 lg:gap-12 p-8 lg:p-12">
+          <p className="text-xl text-center">Welcome to Expression by Shue, where art, life, and passion emerge!</p>
+          <div className="relative min-h-1/2 lg:min-h-[500px] flex max-w-full min-w-full lg:min-w-[1000px]">
+          <div className="carousel overflow-x-auto w-full h-full flex snap-x snap-mandatory bg-yellow-100">
+            <div className="w-full h-full flex flex-row">
+            <div className="shrink-0 h-full snap-center w-full bg-red-100">carousel placeholder</div>
+            <div className="shrink-0 h-full snap-center w-full bg-blue-100">carousel placeholder</div>
+            <div className="shrink-0 h-full snap-center w-full bg-green-100">carousel placeholder</div>
+            </div>
           </div>
-          <div className="grid grid-cols-[288px_minmax(300px,500px)] gap-20">
+          </div>
+          {/* <div className="grid grid-cols-[288px_minmax(300px,500px)] gap-20">
             <div className="relative h-72 w-48 overflow-hidden rounded-md xl:h-96 xl:w-72">
               <Image
                 alt={"shue's profile pic"}
@@ -28,17 +35,7 @@ const Home: NextPage = () => {
               />
             </div>
             <p className="flex whitespace-pre-line">{description}</p>
-          </div>
-          <p className="text-2xl">Browse Gallery for Your New Collections</p>
-          <div className="grid grid-cols-4 gap-8">
-            <span className="h-[200px] w-[200px] bg-red-200">image placeholder</span>
-            <span className="h-[200px] w-[200px] bg-red-200">image placeholder</span>
-            <span className="h-[200px] w-[200px] bg-red-200">image placeholder</span>
-            <span className="h-[200px] w-[200px] bg-red-200">image placeholder</span>
-            <span className="h-[200px] w-[200px] bg-red-200">image placeholder</span>
-            <span className="h-[200px] w-[200px] bg-red-200">image placeholder</span>
-            <span className="h-[200px] w-[200px] bg-red-200">image placeholder</span>
-          </div>
+          </div> */}
         </div>
       </div>
       <Head>
