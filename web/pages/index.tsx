@@ -10,7 +10,6 @@ const description = `This website reflects an artistic journey that began in chi
 `
 
 const Home: NextPage = () => {
-
   return (
     <>
       <Head>
@@ -43,18 +42,26 @@ export default Home
 
 const Carousel = () => (
   <div className="relative h-full min-h-[50vh] lg:min-h-[500px] flex max-w-full min-w-full lg:min-w-[1000px]">
-    <div className="carousel overflow-x-auto w-full h-full flex snap-x snap-mandatory">
-      <div className="w-full h-full flex flex-row">
-        <div className="snap-center shrink-0 h-full  w-full relative">
-          <Image alt="canyon sunset" src={"/images/art/canyon-sunset.jpg"} fill style={{objectFit: "contain"}} />
+    <div className="carousel top-0 right-0 bottom-0 left-0  scroll-smooth overflow-x-auto w-full h-full flex snap-x snap-mandatory">
+      {/* <div className="w-full h-full flex flex-row"> */}
+        <div className="slide shrink-0 h-full w-full flex relative">
+          <Image alt="canyon sunset" src={"/images/art/canyon-sunset.jpg"} fill style={{ objectFit: "contain" }} />
+          <div className="snapper snap-center absolute top-0 left-0  w-full" />
         </div>
-        <div className="snap-center shrink-0 h-full w-full relative">
-          <Image alt="portrait of andy" src={"/images/art/portrait-andy.jpg"} fill style={{objectFit: "contain"}} />
+        <div className="slide shrink-0 h-full w-full flex relative">
+          <Image alt="portrait of andy" src={"/images/art/portrait-andy.jpg"} fill style={{ objectFit: "contain" }} />
+          <div className="snapper snap-center absolute top-0 left-0 w-full" />
         </div>
-        <div className="snap-center shrink-0 h-full w-full relative">
-          <Image alt="farm cherry blossoms" src={"/images/art/farm-cherry-blossoms-oil.jpg"} fill style={{objectFit: "contain"}} />
+        <div className="slide shrink-0 h-full w-full flex relative">
+          <Image
+            alt="farm cherry blossoms"
+            src={"/images/art/farm-cherry-blossoms-oil.jpg"}
+            fill
+            style={{ objectFit: "contain" }}
+          />
+          <div className="snapper snap-center absolute top-0 left-0 w-full" />
         </div>
       </div>
-    </div>
+    {/* </div> */}
   </div>
 )

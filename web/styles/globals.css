@@ -1,5 +1,5 @@
 /* ./styles/globals.css */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @config '../tailwind.config.js';
 
@@ -22,18 +22,18 @@
 }
 
 .carousel {
-position: relative;
+  position: relative;
 
   &::scroll-button(left) {
     left: -15px;
     content: "⬅" / "Scroll Left";
   }
-  
+
   &::scroll-button(right) {
-    right: -25px;
+    right: -15px;
     content: "⮕" / "Scroll Right";
   }
-  
+
   &::scroll-button(*) {
     z-index: 10;
     top: calc(50% - 15px);
@@ -42,11 +42,67 @@ position: relative;
     height: 30px;
     background-color: white;
     position: absolute;
-
   }
 
   &::scroll-button(*):focus-visible {
     outline-offset: 5px;
   }
-  
+}
+
+/* @media (hover: hover) {
+  .snapper {
+    animation-name: tonext, snap;
+    animation-timing-function: ease;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+  }
+
+  .slide:last-child .snapper {
+    animation-name: tostart, snap;
+  }
+} */
+
+@keyframes tonext {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: 100%;
+  }
+  98% {
+    left: 100%;
+  }
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes tostart {
+  75% {
+    left: 0;
+  }
+  95% {
+    left: -200%;
+  }
+  98% {
+    left: -200%;
+  }
+  99% {
+    left: 0;
+  }
+}
+
+@keyframes snap {
+  96% {
+    scroll-snap-align: center;
+  }
+  97% {
+    scroll-snap-align: none;
+  }
+  99% {
+    scroll-snap-align: none;
+  }
+  100% {
+    scroll-snap-align: center;
+  }
 }
