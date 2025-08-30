@@ -13,14 +13,14 @@ const text2 = `While cleaning a massive pile of photos collected over the years,
 const About: NextPage = () => {
   return (
     <div className="flex h-full min-h-screen pb-[90px] pt-[90px]">
-      <div className="flex w-screen flex-col items-center justify-center gap-12 py-12 ">
-        <div className="flex w-[1024px] flex-row items-center gap-20">
+      <div className="flex w-screen flex-col items-center justify-center gap-12 py-12 px-8">
+        <div className="flex lg:flex-row flex-col max-w-full w-[1024px] items-center gap-12 lg:gap-20">
           <SelfPortrait />
-          <BioCard />
+          <p className="whitespace-pre-line">{bio}</p>
         </div>
-        <span className="h-2 w-[1024px] rounded-full bg-orange-800" />
-        <div className="flex w-[1024px] flex-col items-center gap-20">
-          <div className="flex flex-row items-center gap-20">
+        <span className="h-2 max-w-full w-[1024px] rounded-full bg-orange-800" />
+        <div className="flex max-w-full w-[1024px] flex-col items-center gap-12 lg:gap-20">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             <div className="flex flex-col gap-8">
               <p className="whitespace-pre-line text-xl">First Step with Still Life in Oil</p>
               <p className="whitespace-pre-line">{text1}</p>
@@ -28,13 +28,13 @@ const About: NextPage = () => {
             <div className="relative h-72 w-72 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
               <Image
                 alt={"shue's profile pic"}
-                src={"/images/art/teapots-oil.jpg"}
+                src={"/images/art/teapot-oil.jpg"}
                 style={{ objectFit: "contain" }}
                 fill
               />
             </div>
           </div>
-          <div className="flex flex-row items-center gap-20">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             <div className="flex flex-col gap-8">
               <p className="whitespace-pre-line text-xl">
                 {`"Tomorrow is Another Day", Vivien Leigh, Pencil Drawing, May 2025.`}
@@ -78,10 +78,3 @@ When retired from a fulfilling high-tech career in 2024, I decided to rekindle m
 This website is created not only to share my progress on this new journey, but also to inspire fellow retirees that it’s never too late to pursue unfulfilled dreams. I would be honored if you find some pieces that resonate with your life experiences or artistic appreciation, as well as to receive commission requests inspired by the expressions in my artwork. 
 
 Shue Snyder August 10, 2025`
-const BioCard: React.FC = () => {
-  return (
-    <div className="flex">
-      <p className="whitespace-pre-line">{bio}</p>
-    </div>
-  )
-}
