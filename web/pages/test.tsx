@@ -1,14 +1,12 @@
-import type GetStaticProps from "next"
-import type NextPage from "next"
+import { NextPage, InferGetStaticPropsType, GetStaticProps } from "next"
 import { loadArtWork } from "@sanity/loadArtWork"
 import Image from "next/image"
-import type InferGetStaticPropsType from "next"
 
-const Portfolio: NextPage = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Portfolio: NextPage<{artWork: ArtWork[]}> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="flex h-full min-h-screen pb-[90px] pt-[90px]">
-      <div className="flex w-screen flex-wrap items-center justify-center gap-12 py-12 px-8">
-        <ul>
+      <div className="flex w-screen  items-center justify-center gap-12 py-12 px-8">
+        <ul className="flex-wrap flex gap-12">
           {artWork.map((a) => (
             <li className="border flex flex-col" key={a.id}>
               <div className="relative h-100 w-100 border border-red-500 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
@@ -17,9 +15,9 @@ const Portfolio: NextPage = ({ artWork }: InferGetStaticPropsType<typeof getStat
               <span className="text-center font-semibold text-lg">{a.title}</span>
               {a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
               {a.genre.length && <span>Genre: {a.genre.join(", ")}</span>}
-              {a.dimension && <span>Dimensions: {a.dimensions}</span>}
+              {a.dimensions && <span>Dimensions: {a.dimensions}</span>}
               {a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
-              {a.availability === "forSale" ? a.price : a.availability === "soldOut" ? "soldOut" : ""}
+              {a.availability === "forSale" ? convertPrice(a.price) : a.availability === "soldOut" ? "soldOut" : ""}
               {a.availability === "forSale" && a.framed && <span>Framed</span>}
             </li>
           ))}
@@ -31,6 +29,8 @@ const Portfolio: NextPage = ({ artWork }: InferGetStaticPropsType<typeof getStat
 
 export default Portfolio
 
+const convertPrice = (price: number) => `$${String(price / 100)}`
+
 interface ArtWork {
   title: string
   image: string
@@ -38,8 +38,8 @@ interface ArtWork {
   dimensions: string
   availability: "displayOnly" | "forSale" | "soldOut"
   framed: boolean
-  medium: "charcoal" | "oil" | "acrylic" | "watercolor"
-  genre: "hollywood" | "impressionist" | "abstract" | "traditional"
+  medium: string [] // "charcoal" | "oil" | "acrylic" | "watercolor"
+  genre: string[] // "hollywood" | "impressionist" | "abstract" | "traditional"
   id: string
   imageUrl: string
   tags: string[]
