@@ -4,15 +4,15 @@ import Image from "next/image"
 
 const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="flex h-full min-h-screen pb-[90px] pt-[90px]">
-      <div className="flex w-screen items-center justify-center gap-12 py-12 px-8">
-        <ul className="flex-wrap flex gap-12">
+    <div className="flex h-full min-h-screen pt-[90px] pb-[90px]">
+      <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
+        <ul className="flex flex-wrap gap-12">
           {artWork.map((a) => (
-            <li className="border rounded-md flex flex-col" key={a.id}>
-              <div className="relative h-100 w-100 border shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
+            <li className="flex flex-col rounded-md border" key={a.id}>
+              <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md border xl:h-96 xl:w-96">
                 <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
               </div>
-              <span className="text-center font-semibold text-lg">{a.title}</span>
+              <span className="text-center text-lg font-semibold">{a.title}</span>
               {a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
               {a.genre.length && <span>Genre: {a.genre.join(", ")}</span>}
               {a.dimensions && <span>Dimensions: {a.dimensions}</span>}
