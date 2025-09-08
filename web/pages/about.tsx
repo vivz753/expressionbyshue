@@ -27,7 +27,7 @@ const About: NextPage = () => {
             </div>
             <div className="relative h-72 w-72 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
               <Image
-                alt={"shue's profile pic"}
+                alt={"teapot still life"}
                 src={"/images/art/teapot-oil.jpg"}
                 style={{ objectFit: "contain" }}
                 fill
@@ -43,7 +43,7 @@ const About: NextPage = () => {
             </div>
             <div className="relative h-72 w-72 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
               <Image
-                alt={"shue's profile pic"}
+                alt={"vivian leigh portrait"}
                 src={"/images/art/portrait-vivianleigh.jpg"}
                 style={{ objectFit: "contain" }}
                 fill
