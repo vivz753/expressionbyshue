@@ -2,14 +2,14 @@ import { NextPage, InferGetStaticPropsType, GetStaticProps } from "next"
 import { loadArtWork } from "@sanity/loadArtWork"
 import Image from "next/image"
 
-const Portfolio: NextPage<{artWork: ArtWork[]}> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="flex h-full min-h-screen pb-[90px] pt-[90px]">
-      <div className="flex w-screen  items-center justify-center gap-12 py-12 px-8">
+      <div className="flex w-screen items-center justify-center gap-12 py-12 px-8">
         <ul className="flex-wrap flex gap-12">
           {artWork.map((a) => (
-            <li className="border flex flex-col" key={a.id}>
-              <div className="relative h-100 w-100 border border-red-500 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
+            <li className="border rounded-md flex flex-col" key={a.id}>
+              <div className="relative h-100 w-100 border shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
                 <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
               </div>
               <span className="text-center font-semibold text-lg">{a.title}</span>
@@ -38,7 +38,7 @@ interface ArtWork {
   dimensions: string
   availability: "displayOnly" | "forSale" | "soldOut"
   framed: boolean
-  medium: string [] // "charcoal" | "oil" | "acrylic" | "watercolor"
+  medium: string[] // "charcoal" | "oil" | "acrylic" | "watercolor"
   genre: string[] // "hollywood" | "impressionist" | "abstract" | "traditional"
   id: string
   imageUrl: string
