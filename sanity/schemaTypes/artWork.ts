@@ -12,6 +12,7 @@ export const artWork = defineType({
     defineField({
       name: 'image',
       type: 'image',
+      description: 'Must be in JPG or PNG format',
     }),
     defineField({
       name: 'dimensions',
@@ -23,9 +24,8 @@ export const artWork = defineType({
       title: 'Availability',
       type: 'string',
       options: {
-        list: [{
-            title: 'Display Only', value: 'displayOnly'
-          },
+        list: [
+          {title: 'Display Only', value: 'displayOnly'},
           {title: 'For Sale', value: 'forSale'},
           {title: 'Sold Out', value: 'soldOut'},
         ],
