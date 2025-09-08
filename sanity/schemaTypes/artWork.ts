@@ -35,6 +35,7 @@ export const artWork = defineType({
     defineField({
       name: 'price',
       type: 'number',
+      description: 'Multiply by 100 e.g. for $1, the price here would be 100, $99 would be 9900, etc.',
       hidden: ({document}) => document?.availability !== 'forSale'
     }),
     defineField({
