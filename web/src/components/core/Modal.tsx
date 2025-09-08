@@ -10,7 +10,7 @@ interface ModalProps {
   onPrev: () => void
   onNext: () => void
   image: Art
-  children?: JSX.Element
+  children?: React.JSX.Element
 }
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, onNext, children, image }, ref) => {
