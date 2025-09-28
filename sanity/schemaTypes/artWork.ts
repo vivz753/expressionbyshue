@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const artWork = defineType({
   name: 'artWork',
@@ -12,7 +12,7 @@ export const artWork = defineType({
     defineField({
       name: 'image',
       type: 'image',
-      description: 'Must be in JPG or PNG format',
+      description: 'Preferably webp, png, or jpg format (in that order)',
     }),
     defineField({
       name: 'dimensions',
@@ -26,22 +26,24 @@ export const artWork = defineType({
       options: {
         list: [
           {title: 'Display Only', value: 'displayOnly'},
+          {title: 'Reserved', value: 'reserved'},
           {title: 'For Sale', value: 'forSale'},
-          {title: 'Sold Out', value: 'soldOut'},
+          {title: 'Sold', value: 'sold'},
         ],
-        layout: 'radio'
+        layout: 'radio',
       },
     }),
     defineField({
       name: 'price',
       type: 'number',
-      description: 'Multiply by 100 e.g. for $1, the price here would be 100, $99 would be 9900, etc.',
-      hidden: ({document}) => document?.availability !== 'forSale'
+      description:
+        'Multiply by 100 e.g. for $1, the price here would be 100, $99 would be 9900, etc.',
+      hidden: ({document}) => document?.availability !== 'forSale',
     }),
     defineField({
       name: 'framed',
       type: 'boolean',
-      hidden: ({document}) => document?.availability !== 'forSale'
+      hidden: ({document}) => document?.availability !== 'forSale',
     }),
     defineField({
       name: 'medium',
@@ -49,7 +51,15 @@ export const artWork = defineType({
       type: 'array',
       of: [{type: 'string'}],
       options: {
-          list: ['charcoal', 'oil', 'acrylic', 'watercolor'],
+        list: ['charcoal', 'oil', 'acrylic', 'watercolor'],
+      },
+    }),
+    defineField({
+      name: 'support',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        list: ['canvas', 'paper', 'board', 'linen', 'panel'],
       },
     }),
     defineField({
@@ -57,17 +67,61 @@ export const artWork = defineType({
       type: 'array',
       of: [{type: 'string'}],
       options: {
-          list: ['hollywood', 'impressionist', 'abstract', 'traditional'],
+        list: [
+          'portrait',
+          'landscape',
+          'seascape',
+          'cityscape',
+          'still life',
+          'narrative',
+          'historical',
+          'daily life',
+        ],
       },
     }),
     defineField({
-      name: 'tags',
-      description: 'e.g. portrait, landscape, animal, NSFW, etc.',
+      name: 'style',
       type: 'array',
       of: [{type: 'string'}],
       options: {
-        layout: 'tags'
-      }
+        list: ['realism', 'impressionism', 'expressionism', 'abstract'],
+      },
+    }),
+    defineField({
+      name: 'orientation',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        list: ['portrait', 'landscape', 'square', 'round/oval'],
+      },
+    }),
+    defineField({
+      name: 'dominantColor',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        list: [
+          'warm palette',
+          'cold palette',
+          'yellow-dominant',
+          'blue-dominant',
+          'red-dominant',
+          'monochrome',
+        ],
+      },
+    }),
+    defineField({
+      name: 'date',
+      type: 'date',
+    }),
+    defineField({
+      name: 'tags',
+      description: 'subject matter or whatever searchable key you want to add e.g. animal, NSFW, etc.',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags',
+      },
     }),
   ],
 })
