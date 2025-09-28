@@ -9,8 +9,7 @@ import Link from "next/link"
 import { useState } from "react"
 
 const title = `Shue's Portfolio`
-const traditionalImages = images.filter((x) => x.medium !== Medium.TWOD && x.medium !== Medium.THREED)
-const digitalImages = images.filter((x) => x.medium === Medium.TWOD || x.medium === Medium.THREED)
+const traditionalImages = images
 const traditionalFilters = [Medium.OIL, Medium.CHARCOAL]
 
 function scrollToElement(id: string) {
@@ -43,16 +42,11 @@ const Portfolio: NextPage = () => {
         <meta name="description" content="Oil painter." />
         <link rel="icon" href="/images/rainbows/rainbow-blue-svgrepo-com.svg" />
       </Head>
-      <div className="flex h-full min-h-screen w-full flex-row pb-[90px] pt-[90px]">
+      <div className="flex h-full min-h-screen w-full flex-row pt-[90px] pb-[90px]">
         {/* Categories */}
         <div className="hidden flex-col sm:w-[320px] lg:flex">
           <div className="sticky top-0 flex flex-col items-center justify-start gap-8 p-20">
-            <Link
-              href="/#traditional"
-              className="w-64 rounded-md bg-yellow-600 px-4 py-2 text-white hover:bg-yellow-500"
-            >
-              Traditional
-            </Link>
+            <span className="w-64 rounded-md bg-yellow-600 px-4 py-2 text-white">Traditional</span>
             {traditionalFilters.map((f) => (
               <button
                 key={f}
@@ -61,8 +55,8 @@ const Portfolio: NextPage = () => {
                   scrollToElement(f)
                 }}
                 className={clsx(
-                  f === filter && "outline-solid outline-2 outline-offset-2 outline-yellow-300",
-                  "ml-8 w-56 rounded-md bg-yellow-600 px-4 py-2 text-white hover:bg-yellow-500"
+                  f === filter && "outline-2 outline-offset-2 outline-yellow-300 outline-solid",
+                  "ml-8 w-56 rounded-md bg-yellow-600 px-4 py-2 text-white hover:bg-yellow-500",
                 )}
               >
                 {f}
@@ -76,7 +70,7 @@ const Portfolio: NextPage = () => {
               >
                 <div
                   className={clsx(
-                    "absolute -top-12 right-0 translate-x-full rounded-md border border-yellow-900  p-4 text-yellow-900 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100"
+                    "absolute -top-12 right-0 translate-x-full rounded-md border border-yellow-900 p-4 text-yellow-900 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100",
                   )}
                 >
                   你好
@@ -90,13 +84,8 @@ const Portfolio: NextPage = () => {
         {/* Galleries */}
         <div className="flex h-full w-full items-center justify-center p-4 sm:p-8">
           <div className="flex w-full flex-col items-center gap-4 lg:gap-10">
-            <div className="flex flex-col">
-              <span className="text-3xl">Portfolio</span>
-            </div>
+            <div className="flex flex-col"></div>
             <div className="flex h-full w-full flex-col justify-center gap-5 rounded-xl bg-yellow-700 p-4 pb-8 sm:p-8 lg:p-16">
-              <h1 id="traditional" className="my-8 text-center text-3xl text-white lg:mb-12 lg:text-left">
-                Traditional
-              </h1>
               <Gallery
                 filter={filter}
                 setActiveImage={setActiveImage}
