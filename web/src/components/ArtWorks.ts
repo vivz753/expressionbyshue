@@ -12,7 +12,7 @@ export const images: Art[] = [
   },
   {
     url: "/images/art/portrait-vivianleigh.jpg",
-    medium: Medium.OIL,
+    medium: Medium.CHARCOAL,
     title: "portrait in charcoal",
   },
   {
