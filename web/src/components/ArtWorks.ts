@@ -1,6 +1,21 @@
 import { Medium, Art } from "@schemas/global"
 export const images: Art[] = [
   {
+    url: "/images/art/sea-oil.jpg",
+    medium: Medium.OIL,
+    title: "landscape in oil",
+  },
+  {
+    url: "/images/art/Tra_Oil_Land_Zion_Park_24X30.jpg",
+    medium: Medium.OIL,
+    title: "landscape in oil",
+  },
+  {
+    url: "/images/art/Tra_Oil_Lily_Flowers_20X20.jpg",
+    medium: Medium.OIL,
+    title: "landscape in oil",
+  },
+  {
     url: "/images/art/portrait-vet-oil.jpg",
     medium: Medium.OIL,
     title: "portrait in oil",
