@@ -48,13 +48,13 @@ export const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
       role="button"
       onClick={toggleOptions}
       className={clsx(
-        "relative flex h-full min-w-fit items-center rounded-md bg-yellow-700 px-3",
+        "relative flex w-full min-w-fit items-center rounded-md bg-yellow-700 p-2",
         border && "border border-yellow-500",
         outline && "focus:outline focus:outline-white",
       )}
     >
-      <div className={clsx(className, "flex flex-row items-center gap-2")}>
-        <span className="font-medium text-white select-none">{currentOption}</span>
+      <div className={clsx(className, "flex w-full flex-row items-center gap-2")}>
+        <span className="font-medium whitespace-nowrap text-white select-none">{currentOption}</span>
         {caretStyle === "withCircle" ? (
           <span className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white">
             <DownCaretIcon className={clsx(showOptions && "rotate-180", "h-2 w-2 fill-white")} />
@@ -66,16 +66,16 @@ export const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
       {showOptions && (
         <div
           className={clsx(
-            "absolute bottom-[-4px] left-0 z-[1] w-full min-w-min translate-y-full flex-col gap-5 rounded-t-md rounded-b-md bg-yellow-700",
+            "absolute bottom-[-4px] left-0 z-[1] w-full min-w-min translate-y-full flex-col rounded-t-md rounded-b-md bg-yellow-700 p-1",
           )}
         >
           {options.map((option, i) => (
             <button
-              className="group w-full cursor-pointer p-1 text-white select-none"
+              className="group w-full min-w-max cursor-pointer text-white select-none"
               key={i}
               onClick={() => handleOptionSelection(option)}
             >
-              <span className="flex rounded-sm p-1 hover:bg-yellow-600">{option}</span>
+              <span className="flex rounded-sm p-2 hover:bg-yellow-600">{option}</span>
             </button>
           ))}
         </div>
