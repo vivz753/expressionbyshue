@@ -3,11 +3,15 @@ import useComponentVisible from "@src/hooks/useComponentVisible"
 import clsx from "clsx"
 import { FC, KeyboardEvent } from "react"
 
+interface Option {
+  title: string
+  value: string
+}
 export interface DropdownProps {
   className?: string
-  options: string[]
-  setOption?: (option: string) => void | Promise<any>
-  currentOption: string
+  options: Option[]
+  setOption?: (option: Option) => void | Promise<any>
+  currentOption: Option
   outline?: boolean
   border?: boolean
   caretStyle?: "withCircle" | "default"
@@ -24,8 +28,8 @@ export const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
 }) => {
   const [ref, showOptions, setShowOptions] = useComponentVisible(false)
 
-  const handleOptionSelection = (option: string): void => {
-    if (option !== currentOption && setOption) setOption(option)
+  const handleOptionSelection = (option: Option): void => {
+    if (option.value !== currentOption.value && setOption) setOption(option)
   }
 
   const onKeyDown = (e: KeyboardEvent<HTMLButtonElement>): void => {
@@ -54,7 +58,7 @@ export const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
       )}
     >
       <div className={clsx(className, "flex w-full flex-row items-center gap-2")}>
-        <span className="font-medium whitespace-nowrap text-white select-none">{currentOption}</span>
+        <span className="font-medium whitespace-nowrap text-white select-none">{currentOption.title}</span>
         {caretStyle === "withCircle" ? (
           <span className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white">
             <DownCaretIcon className={clsx(showOptions && "rotate-180", "h-2 w-2 fill-white")} />
@@ -70,13 +74,13 @@ export const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
           )}
         >
           {options.map((option, i) => (
-            <button
+            <div
               className="group w-full min-w-max cursor-pointer text-white select-none"
               key={i}
               onClick={() => handleOptionSelection(option)}
             >
-              <span className="flex rounded-sm p-2 hover:bg-yellow-600">{option}</span>
-            </button>
+              <span className="flex rounded-sm p-2 hover:bg-yellow-600">{option.title}</span>
+            </div>
           ))}
         </div>
       )}
