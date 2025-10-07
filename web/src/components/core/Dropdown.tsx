@@ -53,14 +53,14 @@ export const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
         outline && "focus:outline focus:outline-white",
       )}
     >
-      <div className={clsx(className, "flex flex-row items-center justify-center gap-2")}>
+      <div className={clsx(className, "flex flex-row items-center gap-2")}>
         <span className="font-medium text-white select-none">{currentOption}</span>
         {caretStyle === "withCircle" ? (
-          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white">
+          <span className="ml-auto flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white">
             <DownCaretIcon className={clsx(showOptions && "rotate-180", "h-2 w-2 fill-white")} />
           </span>
         ) : (
-          <DownCaretIcon className={clsx(showOptions && "rotate-180", "h-4 w-4 fill-white")} />
+          <DownCaretIcon className={clsx(showOptions && "rotate-180", "ml-auto h-4 w-4 fill-white")} />
         )}
       </div>
       {showOptions && (
