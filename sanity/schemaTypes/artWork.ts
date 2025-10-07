@@ -102,7 +102,7 @@ export const artWork = defineType({
       options: {
         list: [
           {title: "Warm Palette", value: "warmPalette"},
-          {title: "Warm Palette", value: "coldPalette"},
+          {title: "Cold Palette", value: "coldPalette"},
           {title: "Yellow Dominant", value: "yellowDominant"},
           {title: "Red Dominant", value: "redDominant"},
           {title: "Blue Dominant", value: "blueDominant"},
