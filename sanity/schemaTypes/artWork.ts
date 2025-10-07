@@ -20,6 +20,11 @@ export const artWork = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'hidden',
+      description: 'Check this if you do not want this art work to be displayed on the website',
+      type: 'boolean'
+    }),
+    defineField({
       name: 'availability',
       title: 'Availability',
       type: 'string',
@@ -56,8 +61,7 @@ export const artWork = defineType({
     }),
     defineField({
       name: 'support',
-      type: 'array',
-      of: [{type: 'string'}],
+      type: 'string',
       options: {
         list: ['canvas', 'paper', 'board', 'linen', 'panel'],
       },
@@ -87,24 +91,22 @@ export const artWork = defineType({
     }),
     defineField({
       name: 'orientation',
-      type: 'array',
-      of: [{type: 'string'}],
+      type: 'string',
       options: {
         list: ['portrait', 'landscape', 'square', 'round/oval'],
       },
     }),
     defineField({
       name: 'dominantColor',
-      type: 'array',
-      of: [{type: 'string'}],
+      type: 'string',
       options: {
         list: [
-          'warm palette',
-          'cold palette',
-          'yellow-dominant',
-          'blue-dominant',
-          'red-dominant',
-          'monochrome',
+          {title: "Warm Palette", value: "warmPalette"},
+          {title: "Warm Palette", value: "coldPalette"},
+          {title: "Yellow Dominant", value: "yellowDominant"},
+          {title: "Red Dominant", value: "redDominant"},
+          {title: "Blue Dominant", value: "blueDominant"},
+          {title: "Monochrome", value: "monochrome"},
         ],
       },
     }),
