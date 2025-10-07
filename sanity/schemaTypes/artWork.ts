@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const artWork = defineType({
   name: 'artWork',
@@ -74,8 +74,6 @@ export const artWork = defineType({
           'cityscape',
           'still life',
           'narrative',
-          'historical',
-          'daily life',
         ],
       },
     }),
@@ -84,7 +82,7 @@ export const artWork = defineType({
       type: 'array',
       of: [{type: 'string'}],
       options: {
-        list: ['realism', 'impressionism', 'expressionism', 'abstract'],
+        list: ['traditional', 'impressionism', 'expressionism', 'abstract'],
       },
     }),
     defineField({
