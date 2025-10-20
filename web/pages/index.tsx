@@ -17,11 +17,11 @@ const Home: NextPage = () => {
         <meta name="description" content="Shue's art portfolio" />
         <link rel="icon" href="/images/rainbows/rainbow-blue-svgrepo-com.svg" />
       </Head>
-      <div className="flex h-full min-h-screen w-screen pb-[90px] pt-[90px]">
-        <div className="flex w-full flex-col items-center max-w-full justify-center gap-8 lg:gap-12 p-8 lg:p-12">
-          <p className="text-xl text-center">Welcome to Expression by Shue, where art, life, and passion emerge!</p>
+      <div className="flex h-full min-h-screen w-screen pt-[90px] pb-[90px]">
+        <div className="flex w-full max-w-full flex-col items-center justify-center gap-8 p-8 lg:gap-12 lg:p-12">
+          <p className="text-center text-xl">Welcome to Expression by Shue, where art, life, and passion emerge!</p>
           <Carousel />
-          <div className="grid place-items-center gap-12 grid-cols-1 lg:grid-cols-[288px_minmax(300px,500px)] lg:gap-20">
+          <div className="grid grid-cols-1 place-items-center gap-12 lg:grid-cols-[288px_minmax(300px,500px)] lg:gap-20">
             <div className="relative h-72 w-48 overflow-hidden rounded-md xl:h-96 xl:w-72">
               <Image
                 alt={"shue's profile pic"}
@@ -41,27 +41,27 @@ const Home: NextPage = () => {
 export default Home
 
 const Carousel = () => (
-  <div className="relative h-full min-h-[50vh] lg:min-h-[500px] flex max-w-full min-w-full lg:min-w-[1000px]">
-    <div className="carousel top-0 right-0 bottom-0 left-0  scroll-smooth overflow-x-auto w-full h-full flex snap-x snap-mandatory">
+  <div className="relative flex h-full min-h-[50vh] max-w-full min-w-full lg:min-h-[500px] lg:min-w-[1000px]">
+    <div className="carousel top-0 right-0 bottom-0 left-0 flex h-full w-full snap-x snap-mandatory overflow-x-auto scroll-smooth">
       {/* <div className="w-full h-full flex flex-row"> */}
-        <div className="slide shrink-0 h-full w-full flex relative">
-          <Image alt="canyon sunset" src={"/images/art/canyon-sunset.jpg"} fill style={{ objectFit: "contain" }} />
-          <div className="snapper snap-center absolute top-0 left-0  w-full" />
-        </div>
-        <div className="slide shrink-0 h-full w-full flex relative">
-          <Image alt="portrait of andy" src={"/images/art/portrait-andy.jpg"} fill style={{ objectFit: "contain" }} />
-          <div className="snapper snap-center absolute top-0 left-0 w-full" />
-        </div>
-        <div className="slide shrink-0 h-full w-full flex relative">
-          <Image
-            alt="farm cherry blossoms"
-            src={"/images/art/farm-cherry-blossoms-oil.jpg"}
-            fill
-            style={{ objectFit: "contain" }}
-          />
-          <div className="snapper snap-center absolute top-0 left-0 w-full" />
-        </div>
+      <div className="slide relative flex h-full w-full shrink-0">
+        <Image alt="canyon sunset" src={"/images/art/canyon-sunset.jpg"} fill style={{ objectFit: "contain" }} />
+        <div className="snapper absolute top-0 left-0 w-full snap-center" />
       </div>
+      <div className="slide relative flex h-full w-full shrink-0">
+        <Image alt="portrait of andy" src={"/images/art/portrait-andy.jpg"} fill style={{ objectFit: "contain" }} />
+        <div className="snapper absolute top-0 left-0 w-full snap-center" />
+      </div>
+      <div className="slide relative flex h-full w-full shrink-0">
+        <Image
+          alt="farm cherry blossoms"
+          src={"/images/art/farm-cherry-blossoms-oil.jpg"}
+          fill
+          style={{ objectFit: "contain" }}
+        />
+        <div className="snapper absolute top-0 left-0 w-full snap-center" />
+      </div>
+    </div>
     {/* </div> */}
   </div>
 )
