@@ -1,4 +1,4 @@
-import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from "react"
+import { Dispatch, RefObject, SetStateAction, useRef, useState } from "react"
 import useOnClickOutside from "./useOnClickOutside"
 
 /**
@@ -16,11 +16,11 @@ import useOnClickOutside from "./useOnClickOutside"
  */
 export default function useComponentVisible(
   initialIsVisible: boolean,
-): [MutableRefObject<any>, boolean, Dispatch<SetStateAction<boolean>>] {
+): [RefObject<any>, boolean, Dispatch<SetStateAction<boolean>>] {
   const [isComponentVisible, setIsComponentVisible] = useState<boolean>(initialIsVisible)
-  const ref = useRef(null)
+  const ref = useRef<HTMLElement>(null)
 
-  useOnClickOutside(ref, () => setIsComponentVisible(false))
+  useOnClickOutside(ref as RefObject<HTMLElement>, () => setIsComponentVisible(false))
 
   return [ref, isComponentVisible, setIsComponentVisible]
 }
