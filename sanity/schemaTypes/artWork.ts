@@ -16,8 +16,19 @@ export const artWork = defineType({
     }),
     defineField({
       name: 'dimensions',
-      description: 'e.g. 11x14"',
+      description: 'units are assumed to be inches e.g. 11x14',
       type: 'string',
+      options: {
+        list: [
+          '16x20',
+          '16x24',
+          '24x30',
+          '24x36',
+          '30x45',
+          '32x40',
+        ],
+        layout: 'radio',
+      }
     }),
     defineField({
       name: 'hidden',
