@@ -7,10 +7,13 @@ import { useMemo, useState } from "react"
 
 const dimensions = [
   { title: "All", value: "all" },
-  { title: "9x12", value: "9x12" },
-  { title: "11x14", value: "11x14" },
+  { title: "16x20", value: "16x20" },
+  { title: "16x24", value: "16x24" },
+  { title: "24x30", value: "24x30" },
+  { title: "24x36", value: "24x36" },
+  { title: "30x45", value: "30x45" },
+  { title: "32x40", value: "32x40" },
 ]
-// const dominantColors = ["all", "redDominant", "yellowDominant", "blueDominant", "monochrome", "warmPalette", "coldPalette"]
 const dominantColors = [
   { title: "All", value: "all" },
   { title: "Red Dominant", value: "redDominant" },
@@ -128,29 +131,31 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
       </div>
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
         <ul className="flex flex-wrap gap-12">
-          {filteredArtwork && filteredArtwork.length && filteredArtwork.map((a) => (
-            <li className="flex flex-col rounded-md border" key={a.id}>
-              <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md border xl:h-96 xl:w-96">
-                <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
-              </div>
-              <div className="flex flex-col gap-1 p-8">
-                <span className="text-center text-lg font-semibold">{a.title}</span>
-                {a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
-                {a.support && <span>{a.support}</span>}
-                {/* {a.genre.length && <span>Genre: {a.genre.join(", ")}</span>} */}
-                {a.dimensions && <span>{a.dimensions}</span>}
-                <span>{a.framed ? "Framed" : "Unframed"}</span>
-                {a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
-                {a.availability === "forSale"
-                  ? convertPrice(a.price)
-                  : a.availability === "sold"
-                    ? "Sold"
-                    : a.availability === "displayOnly"
-                      ? "displayOnly"
-                      : "Reserved"}
-              </div>
-            </li>
-          ))}
+          {filteredArtwork &&
+            filteredArtwork.length &&
+            filteredArtwork.map((a) => (
+              <li className="flex flex-col rounded-md border" key={a.id}>
+                <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md border xl:h-96 xl:w-96">
+                  <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
+                </div>
+                <div className="flex flex-col gap-1 p-8">
+                  <span className="text-center text-lg font-semibold">{a.title}</span>
+                  {a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
+                  {a.support && <span>{a.support}</span>}
+                  {/* {a.genre.length && <span>Genre: {a.genre.join(", ")}</span>} */}
+                  {a.dimensions && <span>{a.dimensions}</span>}
+                  <span>{a.framed ? "Framed" : "Unframed"}</span>
+                  {a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
+                  {a.availability === "forSale"
+                    ? convertPrice(a.price)
+                    : a.availability === "sold"
+                      ? "Sold"
+                      : a.availability === "displayOnly"
+                        ? "displayOnly"
+                        : "Reserved"}
+                </div>
+              </li>
+            ))}
         </ul>
       </div>
     </div>
@@ -165,7 +170,7 @@ interface ArtWork {
   title: string
   imageUrl: string // originally image but queried as imageUrl
   hidden: boolean
-  dimensions: string // TBD format
+  dimensions: "16x20" | "16x24" | "24x30" | "24x36" | "30x45" | "32x40"
   availability: "displayOnly" | "forSale" | "sold" | "reserved"
   price: number
   framed: boolean
