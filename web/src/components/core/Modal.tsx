@@ -28,32 +28,32 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, o
         {children}
       </div> */}
         <div className="flex h-full w-full flex-row items-center justify-center">
-          <div className="relative flex h-full w-full items-center justify-center p-4 md:p-8 lg:p-32">
+          <div className="relative flex h-full w-full items-center justify-center p-4 md:p-8 lg:p-8">
             <div className="relative flex h-full w-full rounded-lg bg-white">
               <Image alt={image.title} fill style={{ objectFit: "contain" }} src={image.url} />
             </div>
             <button
               onClick={() => onPrev()}
-              className="absolute left-2 m-4 flex shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
+              className="absolute left-2 lg:left-8 m-4 flex shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
             >
               <span className="w-full cursor-pointer text-white">
-                <ChevronLeftIcon className="size-10 text-white" />
+                <ChevronLeftIcon className="size-5 lg:size-7 text-white" />
               </span>
             </button>
             <button
               onClick={onClose}
-              className="absolute top-8 flex min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
+              className="absolute top-8 lg:top-12 flex min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
             >
               <span className="w-full cursor-pointer text-white">
-                <XMarkIcon className="size-8 text-white" />
+                <XMarkIcon className="size-5 lg:size-7 text-white" />
               </span>
             </button>
             <button
               onClick={() => onNext()}
-              className="absolute right-2 m-4 flex min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
+              className="absolute right-2 lg:right-8 m-4 flex min-w-max shrink-0 items-center justify-center rounded-full bg-yellow-600 p-2"
             >
               <span className="w-full cursor-pointer text-white">
-                <ChevronRightIcon className="size-10 text-white" />
+                <ChevronRightIcon className="size-5 lg:size-7 text-white" />
               </span>
             </button>
           </div>
