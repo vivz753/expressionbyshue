@@ -135,23 +135,25 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
             filteredArtwork.length &&
             filteredArtwork.map((a) => (
               <li className="flex flex-col rounded-md border" key={a.id}>
-                <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md border xl:h-96 xl:w-96">
+                {a.imageUrl && <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md border xl:h-96 xl:w-96">
                   <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
-                </div>
+                </div>}
                 <div className="flex flex-col gap-1 p-8">
                   <span className="text-center text-lg font-semibold">{a.title}</span>
-                  {a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
+                  {a.medium && a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
                   {a.support && <span>{a.support}</span>}
-                  {/* {a.genre.length && <span>Genre: {a.genre.join(", ")}</span>} */}
+                  {a.genre && a.genre.length && <span>Genre: {a.genre.join(", ")}</span>}
                   {a.dimensions && <span>{a.dimensions}</span>}
-                  <span>{a.framed ? "Framed" : "Unframed"}</span>
-                  {a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
+                  {/* Only display framed attribute if painting is also for sale */}
+                  {a.availability === "forSale" && <span>{a.framed ? "Framed" : "Unframed"}</span>}
+                  {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
+                  {/* Displays the availability status */}
                   {a.availability === "forSale"
                     ? convertPrice(a.price)
                     : a.availability === "sold"
                       ? "Sold"
                       : a.availability === "displayOnly"
-                        ? "displayOnly"
+                        ? "Display Only"
                         : "Reserved"}
                 </div>
               </li>
