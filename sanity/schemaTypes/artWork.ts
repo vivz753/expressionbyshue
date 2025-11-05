@@ -67,7 +67,13 @@ export const artWork = defineType({
       type: 'array',
       of: [{type: 'string'}],
       options: {
-        list: ['charcoal', 'oil', 'acrylic', 'watercolor'],
+        list: [
+          {title: 'Charcoal', value: 'charcoal'},
+          {title: 'Oil', value: 'oil'},
+          {title: 'Acrylic', value: 'acrylic'},
+          {title: 'Watercolor', value: 'watercolor'},
+          {title: 'Water Pencils', value: 'watercolorPencils'},
+        ]
       },
     }),
     defineField({
