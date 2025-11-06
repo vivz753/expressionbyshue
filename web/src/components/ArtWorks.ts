@@ -1,5 +1,5 @@
 import { Medium, Art } from "@schemas/global"
-export const images: Art[] = [
+export const projects: Art[] = [
   {
     url: "/images/art/sea-oil.jpg",
     medium: Medium.OIL,
@@ -117,4 +117,4 @@ export const images: Art[] = [
   },
 ]
 
-export default images
+export default projects 
