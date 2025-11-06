@@ -19,7 +19,8 @@
       "@*": ["./*"],
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@sanity/*": ["src/sanity/*"]
+      "@sanity/*": ["src/sanity/*"],
+      "@helpers/*": ["src/helpers/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
