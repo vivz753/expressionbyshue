@@ -1,38 +1,32 @@
 import Gallery from "@/src/components/core/Gallery"
 import Modal from "@/src/components/core/Modal"
-import { images } from "@components/ArtWorks"
+import { projects } from "@components/ArtWorks"
 import { Art, Medium } from "@schemas/global"
 import clsx from "clsx"
 import type { NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
 import { useState } from "react"
+import { scrollToElement } from "@helpers/index"
 
 const title = `Shue's Portfolio`
-const traditionalImages = images
+const traditionalProjects = projects
 const traditionalFilters = [Medium.OIL, Medium.CHARCOAL]
-
-function scrollToElement(id: string) {
-  const element = document.getElementById(id)
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" })
-  }
-}
 
 const Portfolio: NextPage = () => {
   const [filter, setFilter] = useState<Medium | null>(null)
-  const [activeImage, setActiveImage] = useState<Art>(traditionalImages[0])
+  const [activeImage, setActiveImage] = useState<Art>(traditionalProjects[0])
   const [showModal, setShowModal] = useState(false)
 
   const onNext = (): void => {
-    const currIndex = images.findIndex((i) => i === activeImage)
-    const nextIndex = currIndex < images.length - 1 ? currIndex + 1 : 0
-    setActiveImage(() => images[nextIndex])
+    const currIndex = projects.findIndex((i) => i === activeImage)
+    const nextIndex = currIndex < projects.length - 1 ? currIndex + 1 : 0
+    setActiveImage(() => projects[nextIndex])
   }
   const onPrev = (): void => {
-    const currIndex = images.findIndex((i) => i === activeImage)
-    const prevIndex = currIndex > 0 ? currIndex - 1 : images.length - 1
-    setActiveImage(() => images[prevIndex])
+    const currIndex = projects.findIndex((i) => i === activeImage)
+    const prevIndex = currIndex > 0 ? currIndex - 1 : projects.length - 1
+    setActiveImage(() => projects[prevIndex])
   }
 
   return (
@@ -90,13 +84,19 @@ const Portfolio: NextPage = () => {
                 filter={filter}
                 setActiveImage={setActiveImage}
                 setShowModal={setShowModal}
-                images={traditionalImages}
+                images={traditionalProjects}
               />
             </div>
           </div>
         </div>
       </div>
-      <Modal show={showModal} onClose={() => setShowModal(false)} image={activeImage} onNext={onNext} onPrev={onPrev} />
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        project={activeImage}
+        onNext={onNext}
+        onPrev={onPrev}
+      />
     </>
   )
 }
