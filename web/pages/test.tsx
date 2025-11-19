@@ -4,6 +4,8 @@ import { Searchbar } from "@src/components/core/Searchbar"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import Image from "next/image"
 import { useMemo, useState } from "react"
+import Modal from "@/src/components/core/Modal"
+import { ArtWork, Medium } from "@schemas/global"
 
 const dimensions = [
   { title: "All", value: "all" },
@@ -79,6 +81,20 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
   const [dominantColor, setDominantColor] = useState(dominantColors[0])
   const [price, setPrice] = useState(prices[0])
 
+  const [activeWork, setActiveWork] = useState<ArtWork>(artWork[0])
+  const [showModal, setShowModal] = useState(false)
+
+  const onNext = (): void => {
+    const currIndex = artWork.findIndex((i) => i === activeWork)
+    const nextIndex = currIndex < artWork.length - 1 ? currIndex + 1 : 0
+    setActiveWork(() => artWork[nextIndex])
+  }
+  const onPrev = (): void => {
+    const currIndex = artWork.findIndex((i) => i === activeWork)
+    const prevIndex = currIndex > 0 ? currIndex - 1 : artWork.length - 1
+    setActiveWork(() => artWork[prevIndex])
+  }
+
   // TODO: add a debouncer
   // TODO: consider making this async
   const filteredArtwork = useMemo(
@@ -134,32 +150,54 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
           {filteredArtwork &&
             filteredArtwork.length &&
             filteredArtwork.map((a) => (
-              <li className="flex flex-col rounded-md border" key={a.id}>
-                {a.imageUrl && <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md border xl:h-96 xl:w-96">
-                  <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
-                </div>}
+              <li
+                onClick={() => {
+                  setActiveWork(a)
+                  setShowModal(true)
+                }}
+                className="flex cursor-pointer flex-col rounded-md bg-yellow-600 p-2 text-white"
+                key={a.id}
+              >
+                {a.imageUrl && (
+                  <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md bg-black xl:h-96 xl:w-96">
+                    <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
+                  </div>
+                )}
                 <div className="flex flex-col gap-1 p-8">
                   <span className="text-center text-lg font-semibold">{a.title}</span>
-                  {a.medium && a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
-                  {a.support && <span>{a.support}</span>}
-                  {a.genre && a.genre.length && <span>Genre: {a.genre.join(", ")}</span>}
-                  {a.dimensions && <span>{a.dimensions}</span>}
-                  {/* Only display framed attribute if painting is also for sale */}
-                  {a.availability === "forSale" && <span>{a.framed ? "Framed" : "Unframed"}</span>}
-                  {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
-                  {/* Displays the availability status */}
-                  {a.availability === "forSale"
-                    ? convertPrice(a.price)
-                    : a.availability === "sold"
-                      ? "Sold"
-                      : a.availability === "displayOnly"
-                        ? "Display Only"
-                        : "Reserved"}
+                  <div className="flex flex-row justify-between">
+                    <div className="flex flex-col gap-1">
+                      {a.medium && a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
+                      {a.support && <span>{a.support}</span>}
+                      {a.genre && a.genre.length && <span>Genre: {a.genre.join(", ")}</span>}
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      {a.dimensions && <span>{a.dimensions} in.</span>}
+                      {/* Only display framed attribute if painting is also for sale */}
+                      {a.availability === "forSale" && <span>{a.framed ? "Framed" : "Unframed"}</span>}
+                      {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
+                      {/* Displays the availability status */}
+                      {a.availability === "forSale"
+                        ? convertPrice(a.price)
+                        : a.availability === "sold"
+                          ? "Sold"
+                          : a.availability === "displayOnly"
+                            ? "Display Only"
+                            : "Reserved"}
+                    </div>
+                  </div>
                 </div>
               </li>
             ))}
         </ul>
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        project={activeWork}
+        onNext={onNext}
+        onPrev={onPrev}
+      />
     </div>
   )
 }
@@ -167,25 +205,6 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
 export default Portfolio
 
 const convertPrice = (price: number) => `$${String(price / 100)}`
-
-interface ArtWork {
-  title: string
-  imageUrl: string // originally image but queried as imageUrl
-  hidden: boolean
-  dimensions: "16x20" | "16x24" | "24x30" | "24x36" | "30x45" | "32x40"
-  availability: "displayOnly" | "forSale" | "sold" | "reserved"
-  price: number
-  framed: boolean
-  medium: string[] // "charcoal" | "oil" | "acrylic" | "watercolor"
-  support: "canvas" | "paper" | "board" | "linen" | "panel"
-  genre: string[] // "portrait" | "landscape" | "seascape" | "cityscape" | "still life" | "narrative"
-  style: string[] // "traditional" | "impressionism" | "expressionism" | "abstract"
-  orientation: "portrait" | "landscape" | "square" | "round/oval"
-  dominantColor: "warmPalette" | "coldPalette" | "yellowDominant" | "redDominant" | "blueDominant" | "monochrome"
-  date: string // YYYY-MM-DD
-  tags: string[]
-  id: string
-}
 
 export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (async () => {
   const artWork = await loadArtWork()

@@ -15,18 +15,18 @@ const traditionalFilters = [Medium.OIL, Medium.CHARCOAL]
 
 const Portfolio: NextPage = () => {
   const [filter, setFilter] = useState<Medium | null>(null)
-  const [activeImage, setActiveImage] = useState<Art>(traditionalProjects[0])
+  const [activeProject, setActiveProject] = useState<Art>(traditionalProjects[0])
   const [showModal, setShowModal] = useState(false)
 
   const onNext = (): void => {
-    const currIndex = projects.findIndex((i) => i === activeImage)
+    const currIndex = projects.findIndex((i) => i === activeProject)
     const nextIndex = currIndex < projects.length - 1 ? currIndex + 1 : 0
-    setActiveImage(() => projects[nextIndex])
+    setActiveProject(() => projects[nextIndex])
   }
   const onPrev = (): void => {
-    const currIndex = projects.findIndex((i) => i === activeImage)
+    const currIndex = projects.findIndex((i) => i === activeProject)
     const prevIndex = currIndex > 0 ? currIndex - 1 : projects.length - 1
-    setActiveImage(() => projects[prevIndex])
+    setActiveProject(() => projects[prevIndex])
   }
 
   return (
@@ -82,9 +82,9 @@ const Portfolio: NextPage = () => {
             <div className="flex h-full w-full flex-col justify-center gap-5 rounded-xl bg-yellow-700 p-4 pb-8 sm:p-8 lg:p-16">
               <Gallery
                 filter={filter}
-                setActiveImage={setActiveImage}
+                setActiveProject={setActiveProject}
                 setShowModal={setShowModal}
-                images={traditionalProjects}
+                projects={traditionalProjects}
               />
             </div>
           </div>
@@ -93,7 +93,7 @@ const Portfolio: NextPage = () => {
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
-        project={activeImage}
+        project={activeProject}
         onNext={onNext}
         onPrev={onPrev}
       />

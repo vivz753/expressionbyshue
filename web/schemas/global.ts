@@ -14,9 +14,31 @@ export enum Medium {
   THREED = "3d",
 }
 
+// Deprecated
 export interface Art {
-  url: string
-  medium: Medium
   title: string
+  imageUrl: string
+  medium: Medium
   content?: ReactNode
+}
+
+export interface ArtWork {
+  title: string
+  imageUrl: string // originally image but queried as imageUrl
+  hidden: boolean
+  dimensions: "16x20" | "16x24" | "24x30" | "24x36" | "30x45" | "32x40"
+  availability: "displayOnly" | "forSale" | "sold" | "reserved"
+  price: number
+  framed: boolean
+  medium: string[] // "charcoal" | "oil" | "acrylic" | "watercolor"
+  support: "canvas" | "paper" | "board" | "linen" | "panel"
+  genre: string[] // "portrait" | "landscape" | "seascape" | "cityscape" | "still life" | "narrative"
+  style: string[] // "traditional" | "impressionism" | "expressionism" | "abstract"
+  orientation: "portrait" | "landscape" | "square" | "round/oval"
+  dominantColor: "warmPalette" | "coldPalette" | "yellowDominant" | "redDominant" | "blueDominant" | "monochrome"
+  date: string // YYYY-MM-DD
+  tags: string[]
+  id: string
+
+  content?: ReactNode // TODO: implement into Sanity schema
 }

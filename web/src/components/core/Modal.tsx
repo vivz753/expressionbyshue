@@ -1,8 +1,11 @@
 import { useState, forwardRef, useEffect } from "react"
 import clsx from "clsx"
 import Image from "next/image"
-import { Art } from "@schemas/global"
+import { ArtWork } from "@schemas/global"
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/solid"
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa"
+import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2"
+
 import { scrollToElement } from "@helpers/index"
 
 interface ModalProps {
@@ -10,7 +13,7 @@ interface ModalProps {
   onClose: () => void
   onPrev: () => void
   onNext: () => void
-  project: Art
+  project: ArtWork
   children?: React.JSX.Element
 }
 
@@ -51,7 +54,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, o
             <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-md">
               <div className="relative inline-block h-full w-full flex-row overflow-hidden overflow-y-auto bg-black">
                 <div className="relative flex h-full w-full overflow-hidden rounded-md">
-                  <Image alt={project.title} fill style={{ objectFit: "contain" }} src={project.url} />
+                  <Image alt={project.title} fill style={{ objectFit: "contain" }} src={project.imageUrl} />
                 </div>
                 {/* View More */}
                 {project.content && (
@@ -72,16 +75,18 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(({ show, onClose, onPrev, o
                 onClick={() => onPrev()}
                 className="absolute left-1 flex shrink-0 items-center justify-center bg-black/25 p-2 lg:left-8 lg:bg-white/15"
               >
-                <span className="w-full cursor-pointer text-white">
-                  <ChevronLeftIcon className="size-5 text-white lg:size-7" />
+                <span className="flex w-full cursor-pointer flex-row items-center gap-2">
+                  <HiArrowLongLeft className="size-5 text-white lg:size-6" />
+                  <span className="text-xs text-white uppercase">Prev</span>
                 </span>
               </button>
               <button
                 onClick={() => onNext()}
                 className="absolute right-1 flex min-w-max shrink-0 items-center justify-center bg-black/25 p-2 lg:right-8 lg:bg-white/15"
               >
-                <span className="w-full cursor-pointer text-white">
-                  <ChevronRightIcon className="size-5 text-white lg:size-7" />
+                <span className="flex w-full cursor-pointer flex-row items-center gap-2">
+                  <span className="text-xs text-white uppercase">Next</span>
+                  <HiArrowLongRight className="size-5 text-white lg:size-6" />
                 </span>
               </button>
             </div>
