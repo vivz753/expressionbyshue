@@ -1,7 +1,7 @@
 import { useState, forwardRef, useEffect } from "react"
 import clsx from "clsx"
 import Image from "next/image"
-import { ArtWork } from "@schemas/global"
+import { ArtWork, Art } from "@schemas/global"
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/solid"
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa"
 import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2"
@@ -13,7 +13,7 @@ interface ModalProps {
   onClose: () => void
   onPrev: () => void
   onNext: () => void
-  project: ArtWork
+  project: ArtWork | Art // TODO: deprecate Art
   children?: React.JSX.Element
 }
 
