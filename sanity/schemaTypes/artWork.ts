@@ -20,6 +20,8 @@ export const artWork = defineType({
       type: 'string',
       options: {
         list: [
+          '5x7',
+          '11x14',
           '16x20',
           '16x24',
           '24x30',
