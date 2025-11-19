@@ -9,6 +9,8 @@ import { ArtWork, Medium } from "@schemas/global"
 
 const dimensions = [
   { title: "All", value: "all" },
+  { title: "5x7", value: "5x7" },
+  { title: "11x14", value: "11x14" },
   { title: "16x20", value: "16x20" },
   { title: "16x24", value: "16x24" },
   { title: "24x30", value: "24x30" },
@@ -37,6 +39,7 @@ const filterBySearch = (products: ArtWork[], input: string) => {
     return (
       product.title
         .toLowerCase()
+        .trim()
         .split(" ")
         .findIndex((token) => token.startsWith(input.toLowerCase()) || input.toLowerCase().includes(token)) !== -1 || // second condition for inputs w 1 token + a space
       product.title.toLowerCase().includes(input.toLowerCase()) || // for inputs w/ multiple tokens + spaces
@@ -147,8 +150,7 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
       </div>
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
         <ul className="flex flex-wrap gap-12">
-          {filteredArtwork &&
-            filteredArtwork.length &&
+          {filteredArtwork && filteredArtwork.length > 0 ? (
             filteredArtwork.map((a) => (
               <li
                 onClick={() => {
@@ -163,32 +165,38 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
                     <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
                   </div>
                 )}
-                <div className="flex flex-col gap-1 p-8">
+                <div className="flex flex-col gap-4 px-6 py-4">
                   <span className="text-center text-lg font-semibold">{a.title}</span>
                   <div className="flex flex-row justify-between">
                     <div className="flex flex-col gap-1">
-                      {a.medium && a.medium.length && <span>Medium: {a.medium.join(", ")}</span>}
-                      {a.support && <span>{a.support}</span>}
-                      {a.genre && a.genre.length && <span>Genre: {a.genre.join(", ")}</span>}
+                      {a.medium && a.medium.length && <span className="capitalize">{a.medium.join(", ")}</span>}
+                      {a.support && <span className="capitalize">{a.support}</span>}
+                      {a.genre && a.genre.length && <span className="capitalize">{a.genre.join(", ")}</span>}
+                      {a.style && a.style.length && <span className="capitalize">{a.style.join(", ")}</span>}
                     </div>
                     <div className="flex flex-col gap-1">
                       {a.dimensions && <span>{a.dimensions} in.</span>}
-                      {/* Only display framed attribute if painting is also for sale */}
-                      {a.availability === "forSale" && <span>{a.framed ? "Framed" : "Unframed"}</span>}
                       {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
                       {/* Displays the availability status */}
-                      {a.availability === "forSale"
-                        ? convertPrice(a.price)
-                        : a.availability === "sold"
-                          ? "Sold"
-                          : a.availability === "displayOnly"
-                            ? "Display Only"
-                            : "Reserved"}
+                      {a.availability === "forSale" ? (
+                        <span>
+                          {convertPrice(a.price)} {a.framed ? "(framed)" : "(unframed)"}
+                        </span>
+                      ) : a.availability === "sold" ? (
+                        "Sold"
+                      ) : a.availability === "displayOnly" ? (
+                        "Display Only"
+                      ) : (
+                        "Reserved"
+                      )}
                     </div>
                   </div>
                 </div>
               </li>
-            ))}
+            ))
+          ) : (
+            <div>No artworks found.</div>
+          )}
         </ul>
       </div>
       <Modal
