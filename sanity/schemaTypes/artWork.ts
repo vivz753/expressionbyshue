@@ -74,7 +74,7 @@ export const artWork = defineType({
           {title: 'Oil', value: 'oil'},
           {title: 'Acrylic', value: 'acrylic'},
           {title: 'Watercolor', value: 'watercolor'},
-          {title: 'Water Pencils', value: 'watercolorPencils'},
+          {title: 'Watercolor Pencils', value: 'watercolorPencils'},
         ]
       },
     }),
