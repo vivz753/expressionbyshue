@@ -32,12 +32,10 @@ export const artWork = defineType({
     }),
     defineField({
       name: 'width (in inches)',
-      description: 'label will be displayed in the following format: 11"x14"',
       type: 'number',
     }),
     defineField({
       name: 'height (in inches)',
-      description: 'label will be displayed in the following format: 11"x14"',
       type: 'number',
     }),
     defineField({
