@@ -7,17 +7,17 @@ import { useMemo, useState } from "react"
 import Modal from "@/src/components/core/Modal"
 import { ArtWork, Medium } from "@schemas/global"
 
-const dimensions = [
-  { title: "All", value: "all" },
-  { title: "5x7", value: "5x7" },
-  { title: "11x14", value: "11x14" },
-  { title: "16x20", value: "16x20" },
-  { title: "16x24", value: "16x24" },
-  { title: "24x30", value: "24x30" },
-  { title: "24x36", value: "24x36" },
-  { title: "30x45", value: "30x45" },
-  { title: "32x40", value: "32x40" },
-]
+// const dimensions = [
+//   { title: "All", value: "all" },
+//   { title: "5x7", value: "5x7" },
+//   { title: "11x14", value: "11x14" },
+//   { title: "16x20", value: "16x20" },
+//   { title: "16x24", value: "16x24" },
+//   { title: "24x30", value: "24x30" },
+//   { title: "24x36", value: "24x36" },
+//   { title: "30x45", value: "30x45" },
+//   { title: "32x40", value: "32x40" },
+// ]
 const dominantColors = [
   { title: "All", value: "all" },
   { title: "Red Dominant", value: "redDominant" },
@@ -59,11 +59,11 @@ const filterBySearch = (products: ArtWork[], input: string) => {
   return filteredProducts
 }
 
-const filterByDimension = (products: ArtWork[], input: { title: string; value: string }) => {
-  if (input.value === "all") return products
+// const filterByDimension = (products: ArtWork[], input: { title: string; value: string }) => {
+//   if (input.value === "all") return products
 
-  return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
-}
+//   return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
+// }
 
 const filterByDominantColor = (products: ArtWork[], input: { title: string; value: string }) => {
   if (input.value === "all") return products
@@ -80,7 +80,7 @@ const sortByPrice = (products: ArtWork[], input: { title: string; value: string 
 
 const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [searchValue, setSearchValue] = useState("")
-  const [dimension, setDimension] = useState(dimensions[0])
+  // const [dimension, setDimension] = useState(dimensions[0])
   const [dominantColor, setDominantColor] = useState(dominantColors[0])
   const [price, setPrice] = useState(prices[0])
 
@@ -105,12 +105,11 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
       // TODO: consider swapping order of filters to improve perf
       // filterByDominantColor(artWork, dominantColor),
       // filterByDimension(artWork, dimension),
-      sortByPrice(
-        filterByDominantColor(filterByDimension(filterBySearch(artWork, searchValue), dimension), dominantColor),
-        price,
-      )?.filter((product) => !product.hidden),
+      sortByPrice(filterByDominantColor(filterBySearch(artWork, searchValue), dominantColor), price)?.filter(
+        (product) => !product.hidden,
+      ),
 
-    [dimension, dominantColor, price, searchValue, artWork],
+    [dominantColor, price, searchValue, artWork],
   )
 
   console.log("filteredArtowrk", filteredArtwork)
@@ -124,14 +123,14 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
             <Searchbar className="flex w-full" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
           </div>
           <div className="flex w-full flex-row justify-between lg:w-auto lg:gap-5">
-            <div className="flex flex-col items-start gap-1">
+            {/* <div className="flex flex-col items-start gap-1">
               <span className="whitespace-nowrap">Dimensions (in.)</span>
               <Dropdown
                 setOption={(dimension) => setDimension(dimension)}
                 options={dimensions}
                 currentOption={dimension}
               />
-            </div>
+            </div> */}
             <div className="flex flex-col items-start gap-1">
               <span className="whitespace-nowrap">Dominant Color</span>
               <Dropdown
@@ -160,23 +159,26 @@ const Portfolio: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStatic
                 className="flex cursor-pointer flex-col rounded-md bg-yellow-600 p-2 text-white"
                 key={a.id}
               >
+                <span className="max-w-[400px] p-4 text-center text-lg font-semibold wrap-anywhere break-all">
+                  {a.title}
+                </span>
                 {a.imageUrl && (
                   <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md bg-black xl:h-96 xl:w-96">
                     <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
                   </div>
                 )}
                 <div className="flex flex-col gap-4 px-6 py-4">
-                  <span className="text-center text-lg font-semibold">{a.title}</span>
                   <div className="flex flex-row justify-between">
                     <div className="flex flex-col gap-1">
                       {a.medium && a.medium.length && <span className="capitalize">{a.medium.join(", ")}</span>}
-                      {a.support && <span className="capitalize">{a.support}</span>}
-                      {a.genre && a.genre.length && <span className="capitalize">{a.genre.join(", ")}</span>}
-                      {a.style && a.style.length && <span className="capitalize">{a.style.join(", ")}</span>}
                     </div>
                     <div className="flex flex-col gap-1">
-                      {a.dimensions && <span>{a.dimensions} in.</span>}
-                      {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>}
+                      {a.width && a.height && (
+                        <span>
+                          {a.width}x{a.height} in.
+                        </span>
+                      )}
+                      {/* {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>} */}
                       {/* Displays the availability status */}
                       {a.availability === "forSale" ? (
                         <span>
