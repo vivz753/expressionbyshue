@@ -1,104 +1,209 @@
-import Gallery from "@/src/components/core/Gallery"
+import { loadArtWork } from "@sanity/loadArtWork"
+import { Dropdown } from "@src/components/core/Dropdown"
+import { Searchbar } from "@src/components/core/Searchbar"
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
+import Image from "next/image"
+import { useMemo, useState } from "react"
 import Modal from "@/src/components/core/Modal"
-import { projects } from "@components/ArtWorks"
-import { Art, Medium } from "@schemas/global"
-import clsx from "clsx"
-import type { NextPage } from "next"
-import Head from "next/head"
-import Link from "next/link"
-import { useState } from "react"
-import { scrollToElement } from "@helpers/index"
+import { ArtWork, Medium } from "@schemas/global"
 
-const title = `Gallery`
-const traditionalProjects = projects
-const traditionalFilters = [Medium.OIL, Medium.CHARCOAL]
+const dominantColors = [
+  { title: "All", value: "all" },
+  { title: "Red Dominant", value: "redDominant" },
+  { title: "Yellow Dominant", value: "yellowDominant" },
+  { title: "Blue Dominant", value: "blueDominant" },
+  { title: "Monochrome", value: "monochrome" },
+  { title: "Cold Palette", value: "coldPalette" },
+  { title: "Warm Palette", value: "warmPalette" },
+]
+const prices = [
+  { title: "Low to High", value: "ascending" },
+  { title: "High to Low", value: "descending" },
+]
 
-const GalleryPage: NextPage = () => {
-  const [filter, setFilter] = useState<Medium | null>(null)
-  const [activeProject, setActiveProject] = useState<Art>(traditionalProjects[0])
+const filterBySearch = (products: ArtWork[], input: string) => {
+  if (!input) return products
+
+  const filteredProducts = products.filter((product) => {
+    return (
+      product.title
+        .toLowerCase()
+        .trim()
+        .split(" ")
+        .findIndex((token) => token.startsWith(input.toLowerCase()) || input.toLowerCase().includes(token)) !== -1 || // second condition for inputs w 1 token + a space
+      product.title.toLowerCase().includes(input.toLowerCase()) || // for inputs w/ multiple tokens + spaces
+      (product.tags &&
+        product.tags?.findIndex(
+          (tag) => tag.toLowerCase().startsWith(input.toLowerCase()) || input.toLowerCase().includes(tag),
+        ) !== -1)
+      // input.toLowerCase().includes(product.artist.toLowerCase()) ||
+      // product.artist.toLowerCase().startsWith(input.toLowerCase()) ||
+      // input.toLowerCase().includes(product.category?.toLowerCase() || "") ||
+      // product.category?.toLowerCase().startsWith(input.toLowerCase())
+    )
+  })
+
+  console.log("filterByName", filteredProducts)
+
+  return filteredProducts
+}
+
+// const filterByDimension = (products: ArtWork[], input: { title: string; value: string }) => {
+//   if (input.value === "all") return products
+
+//   return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
+// }
+
+const filterByDominantColor = (products: ArtWork[], input: { title: string; value: string }) => {
+  if (input.value === "all") return products
+  return products.filter((product) => product.dominantColor?.toLowerCase() === input.value.toLowerCase())
+}
+
+const sortByPrice = (products: ArtWork[], input: { title: string; value: string }) => {
+  if (input.value === "ascending") {
+    return products.sort((a, b) => a.price - b.price)
+  } else if (input.value === "descending") {
+    return products.sort((a, b) => b.price - a.price)
+  }
+}
+
+const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [searchValue, setSearchValue] = useState("")
+  // const [dimension, setDimension] = useState(dimensions[0])
+  const [dominantColor, setDominantColor] = useState(dominantColors[0])
+  const [price, setPrice] = useState(prices[0])
+
+  const [activeWork, setActiveWork] = useState<ArtWork>(artWork[0])
   const [showModal, setShowModal] = useState(false)
 
   const onNext = (): void => {
-    const currIndex = projects.findIndex((i) => i === activeProject)
-    const nextIndex = currIndex < projects.length - 1 ? currIndex + 1 : 0
-    setActiveProject(() => projects[nextIndex])
+    const currIndex = artWork.findIndex((i) => i === activeWork)
+    const nextIndex = currIndex < artWork.length - 1 ? currIndex + 1 : 0
+    setActiveWork(() => artWork[nextIndex])
   }
   const onPrev = (): void => {
-    const currIndex = projects.findIndex((i) => i === activeProject)
-    const prevIndex = currIndex > 0 ? currIndex - 1 : projects.length - 1
-    setActiveProject(() => projects[prevIndex])
+    const currIndex = artWork.findIndex((i) => i === activeWork)
+    const prevIndex = currIndex > 0 ? currIndex - 1 : artWork.length - 1
+    setActiveWork(() => artWork[prevIndex])
   }
 
+  // TODO: add a debouncer
+  // TODO: consider making this async
+  const filteredArtwork = useMemo(
+    () =>
+      // TODO: consider swapping order of filters to improve perf
+      // filterByDominantColor(artWork, dominantColor),
+      // filterByDimension(artWork, dimension),
+      sortByPrice(filterByDominantColor(filterBySearch(artWork, searchValue), dominantColor), price)?.filter(
+        (product) => !product.hidden,
+      ),
+
+    [dominantColor, price, searchValue, artWork],
+  )
+
+  console.log("filteredArtwork", filteredArtwork)
+
   return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content="Oil painter." />
-        <link rel="icon" href="/images/rainbows/rainbow-blue-svgrepo-com.svg" />
-      </Head>
-      <div className="flex h-full min-h-screen w-full flex-row pt-[90px] pb-[90px]">
-        {/* Categories */}
-        <div className="hidden flex-col sm:w-[320px] lg:flex">
-          <div className="sticky top-0 flex flex-col items-center justify-start gap-8 p-20">
-            <span className="w-64 rounded-md bg-yellow-600 px-4 py-2 text-white">Traditional</span>
-            {traditionalFilters.map((f) => (
-              <button
-                key={f}
-                onClick={() => {
-                  setFilter(f)
-                  scrollToElement(f)
-                }}
-                className={clsx(
-                  f === filter && "outline-2 outline-offset-2 outline-yellow-300 outline-solid",
-                  "ml-8 w-56 rounded-md bg-yellow-600 px-4 py-2 text-white hover:bg-yellow-500",
-                )}
-              >
-                {f}
-              </button>
-            ))}
-            {/*  Chat Dialogue */}
-            <div className="m-16 flex items-center justify-center">
-              <div
-                className="group relative flex h-32 w-32 rounded-full bg-cover bg-right"
-                style={{ backgroundImage: `url('/images/profile/shue-close-profile.jpeg')` }}
-              >
-                <div
-                  className={clsx(
-                    "absolute -top-12 right-0 translate-x-full rounded-md border border-yellow-900 p-4 text-yellow-900 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100",
-                  )}
-                >
-                  你好
-                </div>
-              </div>
-            </div>
+    <div className="flex h-full min-h-screen flex-col items-center pt-[90px] pb-[90px]">
+      <div className="group sticky top-0 z-20 flex w-full justify-center bg-yellow-600">
+        <div className="bg-p2 z-[1] flex w-full flex-col items-center justify-center gap-2 rounded-md p-4 py-5 text-white lg:flex-row lg:gap-10 lg:px-14">
+          <div className="flex w-full flex-col items-start gap-1">
+            <span>Item Name</span>
+            <Searchbar className="flex w-full" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
           </div>
-          {/* For sticky purposes, needs empty box as sibling */}
-          <div className="flex h-full w-full" />
-        </div>
-        {/* Galleries */}
-        <div className="flex h-full w-full items-center justify-center p-4 sm:p-8">
-          <div className="flex w-full flex-col items-center gap-4 lg:gap-10">
-            <div className="flex flex-col"></div>
-            <div className="flex h-full w-full flex-col justify-center gap-5 rounded-xl bg-yellow-700 p-4 pb-8 sm:p-8 lg:p-16">
-              <Gallery
-                filter={filter}
-                setActiveProject={setActiveProject}
-                setShowModal={setShowModal}
-                projects={traditionalProjects}
+          <div className="flex w-full flex-row justify-between lg:w-auto lg:gap-5">
+            {/* <div className="flex flex-col items-start gap-1">
+              <span className="whitespace-nowrap">Dimensions (in.)</span>
+              <Dropdown
+                setOption={(dimension) => setDimension(dimension)}
+                options={dimensions}
+                currentOption={dimension}
+              />
+            </div> */}
+            <div className="flex flex-col items-start gap-1">
+              <span className="whitespace-nowrap">Dominant Color</span>
+              <Dropdown
+                setOption={(dominantColor) => setDominantColor(dominantColor)}
+                options={dominantColors}
+                currentOption={dominantColor}
               />
             </div>
+            <div className="flex flex-col items-start gap-1">
+              <span>Price</span>
+              <Dropdown setOption={(price) => setPrice(price)} options={prices} currentOption={price} />
+            </div>
           </div>
+          {/* TODO: price ascending/descending */}
         </div>
+      </div>
+      <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
+        <ul className="flex flex-wrap gap-12">
+          {filteredArtwork && filteredArtwork.length > 0 ? (
+            filteredArtwork.map((a) => (
+              <li
+                onClick={() => {
+                  setActiveWork(a)
+                  setShowModal(true)
+                }}
+                className="flex cursor-pointer flex-col rounded-md bg-yellow-600 p-2 text-white"
+                key={a.id}
+              >
+                <span className="max-w-[400px] p-4 text-center text-lg font-semibold wrap-anywhere break-all">
+                  {a.title}
+                </span>
+                {a.imageUrl && (
+                  <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md bg-black xl:h-96 xl:w-96">
+                    <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
+                  </div>
+                )}
+                <div className="flex flex-col gap-4 px-6 py-4">
+                  <div className="flex flex-row justify-between">
+                    <div className="flex flex-col gap-1">
+                      {a.medium && a.medium.length && <span className="capitalize">{a.medium.join(", ")}</span>}
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      {a.width && a.height && (
+                        <span>
+                          {a.width}x{a.height} in.
+                        </span>
+                      )}
+                      {/* {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>} */}
+                    </div>
+                  </div>
+                </div>
+              </li>
+            ))
+          ) : (
+            <div>No artworks found.</div>
+          )}
+        </ul>
       </div>
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
-        project={activeProject}
+        project={activeWork}
         onNext={onNext}
         onPrev={onPrev}
       />
-    </>
+    </div>
   )
 }
 
-export default GalleryPage
+export default SalePage
+
+const convertPrice = (price: number) => `$${String(price / 100)}`
+
+export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (async () => {
+  const artWork = await loadArtWork()
+  console.log("getStaticProps", artWork)
+
+  const displayOnlyArtWork = artWork.filter((product: ArtWork) => product.availability === "displayOnly")
+  console.log("filtered by availability displayOnly:", displayOnlyArtWork)
+  return {
+    props: {
+      artWork: displayOnlyArtWork,
+    },
+  }
+}) satisfies GetStaticProps<{
+  artWork: ArtWork
+}>

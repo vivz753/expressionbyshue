@@ -7,17 +7,6 @@ import { useMemo, useState } from "react"
 import Modal from "@/src/components/core/Modal"
 import { ArtWork, Medium } from "@schemas/global"
 
-// const dimensions = [
-//   { title: "All", value: "all" },
-//   { title: "5x7", value: "5x7" },
-//   { title: "11x14", value: "11x14" },
-//   { title: "16x20", value: "16x20" },
-//   { title: "16x24", value: "16x24" },
-//   { title: "24x30", value: "24x30" },
-//   { title: "24x36", value: "24x36" },
-//   { title: "30x45", value: "30x45" },
-//   { title: "32x40", value: "32x40" },
-// ]
 const dominantColors = [
   { title: "All", value: "all" },
   { title: "Red Dominant", value: "redDominant" },
@@ -112,7 +101,7 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
     [dominantColor, price, searchValue, artWork],
   )
 
-  console.log("filteredArtowrk", filteredArtwork)
+  console.log("filteredArtwork", filteredArtwork)
 
   return (
     <div className="flex h-full min-h-screen flex-col items-center pt-[90px] pb-[90px]">
@@ -179,18 +168,6 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
                         </span>
                       )}
                       {/* {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>} */}
-                      {/* Displays the availability status */}
-                      {a.availability === "forSale" ? (
-                        <span>
-                          {convertPrice(a.price)} {a.framed ? "(framed)" : "(unframed)"}
-                        </span>
-                      ) : a.availability === "sold" ? (
-                        "Sold"
-                      ) : a.availability === "displayOnly" ? (
-                        "Display Only"
-                      ) : (
-                        "Reserved"
-                      )}
                     </div>
                   </div>
                 </div>
@@ -219,9 +196,12 @@ const convertPrice = (price: number) => `$${String(price / 100)}`
 export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (async () => {
   const artWork = await loadArtWork()
   console.log("getStaticProps", artWork)
+
+  const availableForSaleArtWork = artWork.filter((product: ArtWork) => product.availability === "forSale")
+  console.log("filtered by availability forSale:", availableForSaleArtWork)
   return {
     props: {
-      artWork,
+      artWork: availableForSaleArtWork,
     },
   }
 }) satisfies GetStaticProps<{
