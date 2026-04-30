@@ -9,7 +9,7 @@ Small (8x10 – 11x14): $150 – $400
 Medium (16x20 – 18x24): $400 – $995
 Large (20x24 – 24x36+): $995  – $2500+
 
-Please contact us at info@twinarts.studio. 
+Please contact us at info@twinarts.studio 
 
 Twin Arts Studio
 `
