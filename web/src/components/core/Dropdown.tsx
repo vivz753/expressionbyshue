@@ -103,6 +103,7 @@ export const priceOptions: Option[] = [
   { title: "High to Low", value: "descending" },
 ]
 export const artistOptions: Option[] = [
-  { title: "Gina Lin", value: "gina" },
-  { title: "Shue Snyder", value: "shue" },
+  { title: "All", value: "all" },
+  { title: "Gina Lin", value: "ginaLin" },
+  { title: "Shue Snyder", value: "shueSnyder" },
 ]
