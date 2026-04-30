@@ -11,10 +11,10 @@ interface CardProps {
 export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({ onClick, artWork }) => {
   const a = artWork
   return (
-    <li onClick={onClick} className="flex cursor-pointer flex-col rounded-md bg-yellow-600 p-2 text-white" key={a.id}>
-      <span className="max-w-[400px] p-4 text-center text-lg font-semibold wrap-anywhere break-all">{a.title}</span>
+    <li onClick={onClick} className="flex cursor-pointer flex-col rounded-md bg-yellow-600 text-white" key={a.id}>
+      <span className="max-w-[380px] p-4 text-center text-lg font-semibold wrap-break-word">{a.title}</span>
       {a.imageUrl && (
-        <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md bg-black xl:h-96 xl:w-96">
+        <div className="relative h-[380px] w-[380px] shrink-0 overflow-hidden bg-yellow-600">
           <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
         </div>
       )}

@@ -24,8 +24,8 @@ const Home: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticProps
         <meta name="description" content="Shue's art portfolio" />
         <link rel="icon" href="/images/rainbows/rainbow-blue-svgrepo-com.svg" />
       </Head>
-      <div className="h-full min-h-screen w-screen pt-[90px] pb-[90px]">
-        <div className="flex w-full max-w-full flex-col items-center justify-center gap-8 p-8">
+      <div className="min-h-screen w-screen pt-[90px] pb-[90px]">
+        <div className="mt-10 flex w-full max-w-full flex-col items-center justify-center gap-8 p-8">
           <p className="text-center text-2xl font-bold">Beautiful Arts for Special Times and Places</p>
           <p className="flex max-w-[800px] whitespace-pre-line">{description}</p>
           {/* Gallery */}
