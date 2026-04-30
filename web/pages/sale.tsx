@@ -1,11 +1,10 @@
 import { loadArtWork } from "@sanity/loadArtWork"
-import { Dropdown } from "@src/components/core/Dropdown"
-import { Searchbar } from "@src/components/core/Searchbar"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
-import Image from "next/image"
-import { useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import Modal from "@/src/components/core/Modal"
-import { ArtWork, Medium } from "@schemas/global"
+import { ArtWork } from "@schemas/global"
+import { SearchFilterBar } from "@src/components/core/SearchFilterBar"
+import { Card } from "@/src/components/core/Card"
 
 const dominantColors = [
   { title: "All", value: "all" },
@@ -105,73 +104,19 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
 
   return (
     <div className="flex h-full min-h-screen flex-col items-center pt-[90px] pb-[90px]">
-      <div className="group sticky top-0 z-20 flex w-full justify-center bg-yellow-600">
-        <div className="bg-p2 z-[1] flex w-full flex-col items-center justify-center gap-2 rounded-md p-4 py-5 text-white lg:flex-row lg:gap-10 lg:px-14">
-          <div className="flex w-full flex-col items-start gap-1">
-            <span>Item Name</span>
-            <Searchbar className="flex w-full" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-          </div>
-          <div className="flex w-full flex-row justify-between lg:w-auto lg:gap-5">
-            {/* <div className="flex flex-col items-start gap-1">
-              <span className="whitespace-nowrap">Dimensions (in.)</span>
-              <Dropdown
-                setOption={(dimension) => setDimension(dimension)}
-                options={dimensions}
-                currentOption={dimension}
-              />
-            </div> */}
-            <div className="flex flex-col items-start gap-1">
-              <span className="whitespace-nowrap">Dominant Color</span>
-              <Dropdown
-                setOption={(dominantColor) => setDominantColor(dominantColor)}
-                options={dominantColors}
-                currentOption={dominantColor}
-              />
-            </div>
-            <div className="flex flex-col items-start gap-1">
-              <span>Price</span>
-              <Dropdown setOption={(price) => setPrice(price)} options={prices} currentOption={price} />
-            </div>
-          </div>
-          {/* TODO: price ascending/descending */}
-        </div>
-      </div>
+      <SearchFilterBar searchValue={searchValue} setSearchValue={setSearchValue} price={price} setPrice={setPrice} />
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
         <ul className="flex flex-wrap gap-12">
           {filteredArtwork && filteredArtwork.length > 0 ? (
             filteredArtwork.map((a) => (
-              <li
+              <Card
+                key={a.id}
                 onClick={() => {
                   setActiveWork(a)
                   setShowModal(true)
                 }}
-                className="flex cursor-pointer flex-col rounded-md bg-yellow-600 p-2 text-white"
-                key={a.id}
-              >
-                <span className="max-w-[400px] p-4 text-center text-lg font-semibold wrap-anywhere break-all">
-                  {a.title}
-                </span>
-                {a.imageUrl && (
-                  <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md bg-black xl:h-96 xl:w-96">
-                    <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
-                  </div>
-                )}
-                <div className="flex flex-col gap-4 px-6 py-4">
-                  <div className="flex flex-row justify-between">
-                    <div className="flex flex-col gap-1">
-                      {a.medium && a.medium.length && <span className="capitalize">{a.medium.join(", ")}</span>}
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      {a.width && a.height && (
-                        <span>
-                          {a.width}x{a.height} in.
-                        </span>
-                      )}
-                      {/* {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>} */}
-                    </div>
-                  </div>
-                </div>
-              </li>
+                artWork={a}
+              />
             ))
           ) : (
             <div>No artworks found.</div>
@@ -190,8 +135,6 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
 }
 
 export default SalePage
-
-const convertPrice = (price: number) => `$${String(price / 100)}`
 
 export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (async () => {
   const artWork = await loadArtWork()

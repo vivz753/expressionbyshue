@@ -1,25 +1,11 @@
 import { loadArtWork } from "@sanity/loadArtWork"
-import { Dropdown } from "@src/components/core/Dropdown"
-import { Searchbar } from "@src/components/core/Searchbar"
+import { priceOptions, dominantColorOptions } from "@src/components/core/Dropdown"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
-import Image from "next/image"
 import { useMemo, useState } from "react"
 import Modal from "@/src/components/core/Modal"
-import { ArtWork, Medium } from "@schemas/global"
-
-const dominantColors = [
-  { title: "All", value: "all" },
-  { title: "Red Dominant", value: "redDominant" },
-  { title: "Yellow Dominant", value: "yellowDominant" },
-  { title: "Blue Dominant", value: "blueDominant" },
-  { title: "Monochrome", value: "monochrome" },
-  { title: "Cold Palette", value: "coldPalette" },
-  { title: "Warm Palette", value: "warmPalette" },
-]
-const prices = [
-  { title: "Low to High", value: "ascending" },
-  { title: "High to Low", value: "descending" },
-]
+import { ArtWork } from "@schemas/global"
+import { SearchFilterBar } from "@src/components/core/SearchFilterBar"
+import { Card } from "@/src/components/core/Card"
 
 const filterBySearch = (products: ArtWork[], input: string) => {
   if (!input) return products
@@ -54,24 +40,16 @@ const filterBySearch = (products: ArtWork[], input: string) => {
 //   return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
 // }
 
-const filterByDominantColor = (products: ArtWork[], input: { title: string; value: string }) => {
-  if (input.value === "all") return products
-  return products.filter((product) => product.dominantColor?.toLowerCase() === input.value.toLowerCase())
-}
-
-const sortByPrice = (products: ArtWork[], input: { title: string; value: string }) => {
-  if (input.value === "ascending") {
-    return products.sort((a, b) => a.price - b.price)
-  } else if (input.value === "descending") {
-    return products.sort((a, b) => b.price - a.price)
-  }
-}
+// const filterByDominantColor = (products: ArtWork[], input: { title: string; value: string }) => {
+//   if (input.value === "all") return products
+//   return products.filter((product) => product.dominantColor?.toLowerCase() === input.value.toLowerCase())
+// }
 
 const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [searchValue, setSearchValue] = useState("")
   // const [dimension, setDimension] = useState(dimensions[0])
-  const [dominantColor, setDominantColor] = useState(dominantColors[0])
-  const [price, setPrice] = useState(prices[0])
+  const [dominantColor, setDominantColor] = useState(dominantColorOptions[0])
+  const [price, setPrice] = useState(priceOptions[0])
 
   const [activeWork, setActiveWork] = useState<ArtWork>(artWork[0])
   const [showModal, setShowModal] = useState(false)
@@ -92,86 +70,28 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
   const filteredArtwork = useMemo(
     () =>
       // TODO: consider swapping order of filters to improve perf
-      // filterByDominantColor(artWork, dominantColor),
-      // filterByDimension(artWork, dimension),
-      sortByPrice(filterByDominantColor(filterBySearch(artWork, searchValue), dominantColor), price)?.filter(
-        (product) => !product.hidden,
-      ),
+      filterBySearch(artWork, searchValue)?.filter((product) => !product.hidden),
 
-    [dominantColor, price, searchValue, artWork],
+    [searchValue, artWork],
   )
 
   console.log("filteredArtwork", filteredArtwork)
 
   return (
     <div className="flex h-full min-h-screen flex-col items-center pt-[90px] pb-[90px]">
-      <div className="group sticky top-0 z-20 flex w-full justify-center bg-yellow-600">
-        <div className="bg-p2 z-[1] flex w-full flex-col items-center justify-center gap-2 rounded-md p-4 py-5 text-white lg:flex-row lg:gap-10 lg:px-14">
-          <div className="flex w-full flex-col items-start gap-1">
-            <span>Item Name</span>
-            <Searchbar className="flex w-full" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-          </div>
-          <div className="flex w-full flex-row justify-between lg:w-auto lg:gap-5">
-            {/* <div className="flex flex-col items-start gap-1">
-              <span className="whitespace-nowrap">Dimensions (in.)</span>
-              <Dropdown
-                setOption={(dimension) => setDimension(dimension)}
-                options={dimensions}
-                currentOption={dimension}
-              />
-            </div> */}
-            <div className="flex flex-col items-start gap-1">
-              <span className="whitespace-nowrap">Dominant Color</span>
-              <Dropdown
-                setOption={(dominantColor) => setDominantColor(dominantColor)}
-                options={dominantColors}
-                currentOption={dominantColor}
-              />
-            </div>
-            <div className="flex flex-col items-start gap-1">
-              <span>Price</span>
-              <Dropdown setOption={(price) => setPrice(price)} options={prices} currentOption={price} />
-            </div>
-          </div>
-          {/* TODO: price ascending/descending */}
-        </div>
-      </div>
+      <SearchFilterBar searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
         <ul className="flex flex-wrap gap-12">
           {filteredArtwork && filteredArtwork.length > 0 ? (
             filteredArtwork.map((a) => (
-              <li
+              <Card
+                key={a.id}
                 onClick={() => {
                   setActiveWork(a)
                   setShowModal(true)
                 }}
-                className="flex cursor-pointer flex-col rounded-md bg-yellow-600 p-2 text-white"
-                key={a.id}
-              >
-                <span className="max-w-[400px] p-4 text-center text-lg font-semibold wrap-anywhere break-all">
-                  {a.title}
-                </span>
-                {a.imageUrl && (
-                  <div className="relative h-100 w-100 shrink-0 overflow-hidden rounded-md bg-black xl:h-96 xl:w-96">
-                    <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
-                  </div>
-                )}
-                <div className="flex flex-col gap-4 px-6 py-4">
-                  <div className="flex flex-row justify-between">
-                    <div className="flex flex-col gap-1">
-                      {a.medium && a.medium.length && <span className="capitalize">{a.medium.join(", ")}</span>}
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      {a.width && a.height && (
-                        <span>
-                          {a.width}x{a.height} in.
-                        </span>
-                      )}
-                      {/* {a.tags && a.tags.length && <span>Tags: {a.tags.join(", ")}</span>} */}
-                    </div>
-                  </div>
-                </div>
-              </li>
+                artWork={a}
+              />
             ))
           ) : (
             <div>No artworks found.</div>
@@ -190,8 +110,6 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
 }
 
 export default SalePage
-
-const convertPrice = (price: number) => `$${String(price / 100)}`
 
 export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (async () => {
   const artWork = await loadArtWork()
