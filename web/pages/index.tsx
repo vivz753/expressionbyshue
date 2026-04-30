@@ -1,15 +1,22 @@
-import type { NextPage } from "next"
+import { loadArtWork } from "@sanity/loadArtWork"
+import { ArtWork } from "@schemas/global"
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import Head from "next/head"
 import Image from "next/image"
+import Gallery from "@/src/components/core/Gallery"
+import { useState } from "react"
 
 const title = `Expression by Shue`
 
-const description = `This website reflects an artistic journey that began in childhood, paused for decades, and found a new life in retirement. I hope you enjoy witnessing the evolution of my work and discover pieces that resonate with your passions and heartfelt life experiences. I would be honored to receive your commission requests.
- 
-– Shue Snyder
-`
+const description = `
+Shue and Gina are twin sisters born in Taipei, Taiwan. Both were recognized for their artistic talent at a young age and received numerous awards in their childhood. They shared the same dream of becoming professional artists one day. However, life took them in different directions, and they set aside their artistic journey for nearly 60 years. Now, they have returned to their shared passion, creating original paintings inspired by nature, seasons, and the beauty of everyday life.
 
-const Home: NextPage = () => {
+Please visit the Gallery and Available for Sale  to view all artwork.  For special needs, contact info@twinart.strudio or visit Commission page. 
+`
+const Home: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const [activeProject, setActiveProject] = useState<ArtWork>({} as ArtWork)
+  const [showModal, setShowModal] = useState(false)
+
   return (
     <>
       <Head>
@@ -17,23 +24,24 @@ const Home: NextPage = () => {
         <meta name="description" content="Shue's art portfolio" />
         <link rel="icon" href="/images/rainbows/rainbow-blue-svgrepo-com.svg" />
       </Head>
-      <div className="flex h-full min-h-screen w-screen pt-[90px] pb-[90px]">
-        <div className="flex w-full max-w-full flex-col items-center justify-center gap-8 p-8 lg:gap-12 lg:p-12">
-          <p className="text-center text-xl">Welcome to Expression by Shue, where art, life, and passion emerge!</p>
-          <Carousel />
-          <div className="grid grid-cols-1 place-items-center gap-12 lg:grid-cols-[288px_minmax(300px,500px)] lg:gap-20">
-            <div className="relative h-72 w-48 overflow-hidden rounded-md xl:h-96 xl:w-72">
-              <Image
-                alt={"shue's profile pic"}
-                src={"/images/profile/shue-profile.jpeg"}
-                style={{ objectFit: "cover" }}
-                fill
-              />
+      <div className="h-full min-h-screen w-screen pt-[90px] pb-[90px]">
+        <div className="flex w-full max-w-full flex-col items-center justify-center gap-8 p-8">
+          <p className="text-center text-2xl font-bold">Beautiful Arts for Special Times and Places</p>
+          <p className="flex max-w-[800px] whitespace-pre-line">{description}</p>
+          {/* Gallery */}
+          {artWork && artWork.length > 0 && (
+            <div className="flex h-full w-full items-center justify-center p-4 sm:p-8">
+              <div className="flex w-full flex-col items-center gap-4 lg:gap-10">
+                <div className="flex flex-col"></div>
+                <div className="flex h-full w-full flex-col justify-center gap-5 rounded-xl bg-yellow-700 p-4 pb-8 sm:p-8 lg:p-16">
+                  <Gallery setActiveProject={setActiveProject} setShowModal={setShowModal} projects={artWork} />
+                </div>
+              </div>
             </div>
-            <p className="flex whitespace-pre-line">{description}</p>
-          </div>
+          )}
         </div>
       </div>
+      <div className="flex h-full w-full flex-col justify-center gap-5 rounded-xl bg-yellow-700 p-4 pb-8 sm:p-8 lg:p-16"></div>
     </>
   )
 }
@@ -65,3 +73,18 @@ const Carousel = () => (
     {/* </div> */}
   </div>
 )
+
+export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (async () => {
+  const artWork = await loadArtWork()
+  console.log("getStaticProps", artWork)
+
+  const featuredArtWork = artWork.filter((product: ArtWork) => product.featured)
+  console.log("filtered by featured:", featuredArtWork)
+  return {
+    props: {
+      artWork: featuredArtWork,
+    },
+  }
+}) satisfies GetStaticProps<{
+  artWork: ArtWork
+}>
