@@ -10,8 +10,9 @@ type NavigationLink = {
 }
 
 const labels: NavigationLink[] = [
-  { name: "Portfolio", url: "/portfolio" },
   { name: "About", url: "/about" },
+  { name: "Available for Sale", url: "/sale" },
+  { name: "Gallery", url: "/gallery" },
   { name: "Commissions", url: "/commissions" },
   // { name: "contact", url: "/contact" },
 ]

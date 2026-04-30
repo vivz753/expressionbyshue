@@ -9,11 +9,11 @@ import Link from "next/link"
 import { useState } from "react"
 import { scrollToElement } from "@helpers/index"
 
-const title = `Shue's Portfolio`
+const title = `Gallery`
 const traditionalProjects = projects
 const traditionalFilters = [Medium.OIL, Medium.CHARCOAL]
 
-const Portfolio: NextPage = () => {
+const GalleryPage: NextPage = () => {
   const [filter, setFilter] = useState<Medium | null>(null)
   const [activeProject, setActiveProject] = useState<Art>(traditionalProjects[0])
   const [showModal, setShowModal] = useState(false)
@@ -101,4 +101,4 @@ const Portfolio: NextPage = () => {
   )
 }
 
-export default Portfolio
+export default GalleryPage

@@ -12,42 +12,20 @@ To see more of the legendary, elegant, and talented movie stars, please visit th
 
 const About: NextPage = () => {
   return (
-    <div className="flex h-full min-h-screen pt-[90px] pb-[90px]">
-      <div className="flex w-screen flex-col items-center justify-center gap-12 px-8 py-12">
-        <div className="flex w-[1024px] max-w-full flex-col items-center gap-12 lg:flex-row lg:gap-20">
-          <SelfPortrait />
-          <p className="whitespace-pre-line">{bio}</p>
-        </div>
-        <span className="h-2 w-[1024px] max-w-full rounded-full bg-orange-800" />
-        <div className="flex w-[1024px] max-w-full flex-col items-center gap-12 lg:gap-20">
-          <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-20">
-            <div className="flex flex-col gap-8">
-              <p className="text-xl whitespace-pre-line">First Step with Still Life in Oil</p>
-              <p className="whitespace-pre-line">{text1}</p>
-            </div>
-            <div className="relative h-72 w-72 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
-              <Image
-                alt={"teapot still life"}
-                src={"/images/art/teapot-oil.jpg"}
-                style={{ objectFit: "contain" }}
-                fill
-              />
-            </div>
+    <div className="min-h-screen pt-[90px] pb-[90px]">
+      <div className="flex w-screen flex-col items-center justify-center gap-12 px-12 py-12">
+        <div className="flex w-[1024px] flex-col items-center justify-center gap-12 p-12">
+          <div className="flex max-w-full flex-col items-center gap-12 lg:flex-row lg:gap-20">
+            <ShuePortrait />
+            <p className="whitespace-pre-line">{shueBio}</p>
           </div>
-          <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-20">
-            <div className="flex flex-col gap-8">
-              <p className="text-xl whitespace-pre-line">
-                {`"Tomorrow is Another Day", Vivien Leigh, Pencil Drawing, May 2025.`}
-              </p>
-              <p className="whitespace-pre-line">{text2}</p>
-            </div>
-            <div className="relative h-72 w-72 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-96">
-              <Image
-                alt={"vivian leigh portrait"}
-                src={"/images/art/portrait-vivianleigh.jpg"}
-                style={{ objectFit: "contain" }}
-                fill
-              />
+          <span className="h-2 w-[1024px] max-w-full rounded-full bg-orange-800" />
+          <div className="flex max-w-full flex-col items-center gap-12 lg:gap-20">
+            <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-20">
+              <div className="flex max-w-full flex-col items-center gap-12 lg:flex-row lg:gap-20">
+                <p className="whitespace-pre-line">{ginaBio}</p>
+                <GinaPortrait />
+              </div>
             </div>
           </div>
         </div>
@@ -58,7 +36,7 @@ const About: NextPage = () => {
 
 export default About
 
-const SelfPortrait: React.FC = () => {
+const ShuePortrait: React.FC = () => {
   return (
     <div className="relative h-72 w-48 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-72">
       <Image
@@ -70,11 +48,26 @@ const SelfPortrait: React.FC = () => {
     </div>
   )
 }
+const GinaPortrait: React.FC = () => {
+  return (
+    <div className="relative h-72 w-48 shrink-0 overflow-hidden rounded-md xl:h-96 xl:w-72">
+      <Image alt={"gina's profile pic"} src={"/images/profile/gina.png"} style={{ objectFit: "cover" }} fill />
+    </div>
+  )
+}
 
-const bio = `Recognized for my natural talent and received numerous art awards during my childhood, I fueled my dream of becoming a professional artist. However, life took me in a different direction, and my artistic journey was set aside for nearly 60 years.
+const shueBio = `About Shue
+ 
 
-When retired from a fulfilling high-tech career in 2024, I decided to rekindle my raw talent and started to study oil painting at the  Hub Academy in Saratoga, California. Needless to say, I also soon discovered that the spark of creativity, passion, and artistry that once defined my youth had never truly left me.
+After retiring from a fulfilling high-tech career in 2024, I rekindled my lifelong passion for art and joined Gina to begin formally studying oil painting at the Hub Academy in Saratoga, California. I soon realized that the creativity and passion I had as a child had never truly left me.
+ 
+Receiving several commission requests, I decided to pursue my dream of becoming a professional artist. Through this journey, I hope not only to share my artwork, but also to inspire fellow retirees to believe that it is never too late to pursue unfulfilled dreams and turn them into reality.
 
-This website is created not only to share my progress on this new journey, but also to inspire fellow retirees that it's never too late to pursue unfulfilled dreams. I would be honored if you find some pieces that resonate with your life experiences or artistic appreciation, as well as to receive commission requests inspired by the expressions in my artwork. 
+ 
+Shue Snyder, August 20, 2024`
 
-Shue Snyder August 10, 2025`
+const ginaBio = `About Gina
+
+Gina is a passionate visionary who has transformed her career multiple times as business owner. 
+
+ Upon retiring, rather than resting on her laurels, Gina chose to pursue her childhood dream of becoming a professional painter. With a vibrant palette and an eye for detail, her artwork quickly gained attention. Gina has showcased her talent in several art shows, earning acclaim and delighting art enthusiasts with her unique perspective and expressive style. Today, Gina continues creating, inspiring others to follow their passions and embrace their creativity at any stage of life.`
