@@ -31,7 +31,7 @@ const Header: FC = () => {
       </Link>
       {labels.map((label, i) => (
         <Link key={i} href={label.url}>
-          <span className="sm:text-md text-xs text-white hover:text-yellow-900">{label.name}</span>
+          <span className="sm:text-base text-xs text-white hover:text-yellow-900">{label.name}</span>
         </Link>
       ))}
     </header>
