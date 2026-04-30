@@ -1,6 +1,6 @@
 import { loadArtWork } from "@sanity/loadArtWork"
 import { ArtWork } from "@schemas/global"
-import { priceOptions, dominantColorOptions } from "@src/components/core/Dropdown"
+import { dominantColorOptions, artistOptions } from "@src/components/core/Dropdown"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import { useMemo, useState } from "react"
 import Modal from "@/src/components/core/Modal"
@@ -49,7 +49,7 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
   const [searchValue, setSearchValue] = useState("")
   // const [dimension, setDimension] = useState(dimensions[0])
   const [dominantColor, setDominantColor] = useState(dominantColorOptions[0])
-  const [price, setPrice] = useState(priceOptions[0])
+  const [artist, setArtist] = useState(artistOptions[0])
 
   const [activeWork, setActiveWork] = useState<ArtWork>(artWork[0])
   const [showModal, setShowModal] = useState(false)
@@ -79,7 +79,14 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
 
   return (
     <div className="flex h-full min-h-screen flex-col items-center pt-[90px] pb-[90px]">
-      <SearchFilterBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      <SearchFilterBar
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        artist={artist}
+        setArtist={setArtist}
+        dominantColor={dominantColor}
+        setDominantColor={setDominantColor}
+      />
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
         <ul className="grid-auto-flow grid place-items-center gap-12 lg:grid-cols-2 xl:grid-cols-3 xl:gap-20">
           {filteredArtwork && filteredArtwork.length > 0 ? (

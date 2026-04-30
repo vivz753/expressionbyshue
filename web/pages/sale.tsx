@@ -1,24 +1,11 @@
 import { loadArtWork } from "@sanity/loadArtWork"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import React, { useMemo, useState } from "react"
+import { priceOptions, dominantColorOptions, artistOptions } from "@src/components/core/Dropdown"
 import Modal from "@/src/components/core/Modal"
 import { ArtWork } from "@schemas/global"
 import { SearchFilterBar } from "@src/components/core/SearchFilterBar"
 import { Card } from "@/src/components/core/Card"
-
-const dominantColors = [
-  { title: "All", value: "all" },
-  { title: "Red Dominant", value: "redDominant" },
-  { title: "Yellow Dominant", value: "yellowDominant" },
-  { title: "Blue Dominant", value: "blueDominant" },
-  { title: "Monochrome", value: "monochrome" },
-  { title: "Cold Palette", value: "coldPalette" },
-  { title: "Warm Palette", value: "warmPalette" },
-]
-const prices = [
-  { title: "Low to High", value: "ascending" },
-  { title: "High to Low", value: "descending" },
-]
 
 const filterBySearch = (products: ArtWork[], input: string) => {
   if (!input) return products
@@ -69,8 +56,9 @@ const sortByPrice = (products: ArtWork[], input: { title: string; value: string 
 const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [searchValue, setSearchValue] = useState("")
   // const [dimension, setDimension] = useState(dimensions[0])
-  const [dominantColor, setDominantColor] = useState(dominantColors[0])
-  const [price, setPrice] = useState(prices[0])
+  const [dominantColor, setDominantColor] = useState(dominantColorOptions[0])
+  const [price, setPrice] = useState(priceOptions[0])
+  const [artist, setArtist] = useState(artistOptions[0])
 
   const [activeWork, setActiveWork] = useState<ArtWork>(artWork[0])
   const [showModal, setShowModal] = useState(false)
@@ -104,7 +92,16 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
 
   return (
     <div className="flex h-full min-h-screen flex-col items-center pt-[90px] pb-[90px]">
-      <SearchFilterBar searchValue={searchValue} setSearchValue={setSearchValue} price={price} setPrice={setPrice} />
+      <SearchFilterBar
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        price={price}
+        setPrice={setPrice}
+        artist={artist}
+        setArtist={setArtist}
+        dominantColor={dominantColor}
+        setDominantColor={setDominantColor}
+      />
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
         <ul className="grid-auto-flow grid place-items-center gap-12 sm:grid-cols-2 xl:grid-cols-3 xl:gap-20">
           {filteredArtwork && filteredArtwork.length > 0 ? (
