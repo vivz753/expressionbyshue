@@ -31,11 +31,11 @@ export const artWork = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'width (in inches)',
+      name: 'width_in_inches',
       type: 'number',
     }),
     defineField({
-      name: 'height (in inches)',
+      name: 'height_in_inches',
       type: 'number',
     }),
     defineField({
@@ -100,11 +100,17 @@ export const artWork = defineType({
       name: 'genre',
       type: 'array',
       of: [{type: 'string'}],
+      options: {
+        layout: 'tags',
+      },
     }),
     defineField({
       name: 'subject',
       type: 'array',
       of: [{type: 'string'}],
+      options: {
+        layout: 'tags',
+      },
     }),
     defineField({
       name: 'style',
