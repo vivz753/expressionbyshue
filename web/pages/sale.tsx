@@ -6,52 +6,7 @@ import Modal from "@/src/components/core/Modal"
 import { ArtWork } from "@schemas/global"
 import { SearchFilterBar } from "@src/components/core/SearchFilterBar"
 import { Card } from "@/src/components/core/Card"
-
-const filterBySearch = (products: ArtWork[], input: string) => {
-  if (!input) return products
-
-  const filteredProducts = products.filter((product) => {
-    return (
-      product.title
-        .toLowerCase()
-        .trim()
-        .split(" ")
-        .findIndex((token) => token.startsWith(input.toLowerCase()) || input.toLowerCase().includes(token)) !== -1 || // second condition for inputs w 1 token + a space
-      product.title.toLowerCase().includes(input.toLowerCase()) || // for inputs w/ multiple tokens + spaces
-      (product.tags &&
-        product.tags?.findIndex(
-          (tag) => tag.toLowerCase().startsWith(input.toLowerCase()) || input.toLowerCase().includes(tag),
-        ) !== -1)
-      // input.toLowerCase().includes(product.artist.toLowerCase()) ||
-      // product.artist.toLowerCase().startsWith(input.toLowerCase()) ||
-      // input.toLowerCase().includes(product.category?.toLowerCase() || "") ||
-      // product.category?.toLowerCase().startsWith(input.toLowerCase())
-    )
-  })
-
-  console.log("filterByName", filteredProducts)
-
-  return filteredProducts
-}
-
-// const filterByDimension = (products: ArtWork[], input: { title: string; value: string }) => {
-//   if (input.value === "all") return products
-
-//   return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
-// }
-
-const filterByDominantColor = (products: ArtWork[], input: { title: string; value: string }) => {
-  if (input.value === "all") return products
-  return products.filter((product) => product.dominantColor?.toLowerCase() === input.value.toLowerCase())
-}
-
-const sortByPrice = (products: ArtWork[], input: { title: string; value: string }) => {
-  if (input.value === "ascending") {
-    return products.sort((a, b) => a.price - b.price)
-  } else if (input.value === "descending") {
-    return products.sort((a, b) => b.price - a.price)
-  }
-}
+import { filterBySearch, filterByDominantColor, filterByArtist, sortByPrice } from "@/src/helpers"
 
 const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [searchValue, setSearchValue] = useState("")
@@ -79,13 +34,13 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
   const filteredArtwork = useMemo(
     () =>
       // TODO: consider swapping order of filters to improve perf
-      // filterByDominantColor(artWork, dominantColor),
       // filterByDimension(artWork, dimension),
-      sortByPrice(filterByDominantColor(filterBySearch(artWork, searchValue), dominantColor), price)?.filter(
-        (product) => !product.hidden,
-      ),
+      sortByPrice(
+        filterByArtist(filterByDominantColor(filterBySearch(artWork, searchValue), dominantColor), artist),
+        price,
+      )?.filter((product) => !product.hidden),
 
-    [dominantColor, price, searchValue, artWork],
+    [dominantColor, price, artist, searchValue, artWork],
   )
 
   console.log("filteredArtwork", filteredArtwork)
