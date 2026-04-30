@@ -11,28 +11,27 @@ type NavigationLink = {
 
 const labels: NavigationLink[] = [
   { name: "About", url: "/about" },
-  { name: "Available for Sale", url: "/sale" },
+  { name: "For Sale", url: "/sale" },
   { name: "Gallery", url: "/gallery" },
   { name: "Commissions", url: "/commissions" },
-  // { name: "contact", url: "/contact" },
 ]
 
 const Header: FC = () => {
   return (
-    <header className="absolute top-0 z-1 flex h-[90px] w-full flex-row items-center justify-evenly bg-yellow-600 lg:justify-start lg:gap-8 lg:px-8">
+    <header className="absolute top-0 z-1 flex h-[90px] w-full flex-row items-center justify-evenly gap-2 bg-yellow-600 lg:justify-start lg:gap-8 lg:px-8">
       <Link href="/" className="flex flex-row gap-2">
-        <div className="relative h-[50px] w-[50px] lg:h-[65px] lg:w-[65px]">
+        <div className="relative h-[35px] w-[35px] lg:h-[65px] lg:w-[65px]">
           <Image alt="Expression by Shue" fill style={{ objectFit: "fill" }} src={"/images/logo_black.png"} />
         </div>
         <div className="flex flex-col">
-          <span className="text-lg">Twin Arts Studio</span>
-          <span className="text-xs">By Gina & Shue</span>
-          <span className="text-xs">Original Oil Paintings & Commissions</span>
+          <span className="text-sm sm:text-lg">Twin Arts Studio</span>
+          <span className="text-xs sm:block">By Gina & Shue</span>
+          <span className="hidden text-xs sm:block">Original Oil Paintings & Commissions</span>
         </div>
       </Link>
       {labels.map((label, i) => (
         <Link key={i} href={label.url}>
-          <span className="rounded-xl text-white hover:text-yellow-900">{label.name}</span>
+          <span className="sm:text-md text-xs text-white hover:text-yellow-900">{label.name}</span>
         </Link>
       ))}
     </header>
