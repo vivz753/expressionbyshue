@@ -106,7 +106,7 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
     <div className="flex h-full min-h-screen flex-col items-center pt-[90px] pb-[90px]">
       <SearchFilterBar searchValue={searchValue} setSearchValue={setSearchValue} price={price} setPrice={setPrice} />
       <div className="flex w-screen items-center justify-center gap-12 px-8 py-12">
-        <ul className="flex flex-wrap gap-12">
+        <ul className="grid-auto-flow grid place-items-center gap-12 sm:grid-cols-2 xl:grid-cols-3 xl:gap-20">
           {filteredArtwork && filteredArtwork.length > 0 ? (
             filteredArtwork.map((a) => (
               <Card
