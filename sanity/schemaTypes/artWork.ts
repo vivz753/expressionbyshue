@@ -15,22 +15,28 @@ export const artWork = defineType({
       description: 'Preferably webp, png, or jpg format (in that order)',
     }),
     defineField({
-      name: 'dimensions',
-      description: 'units are assumed to be inches e.g. 11x14',
+      name: 'artist',
       type: 'string',
       options: {
         list: [
-          '5x7',
-          '11x14',
-          '16x20',
-          '16x24',
-          '24x30',
-          '24x36',
-          '30x45',
-          '32x40',
+          {title: 'Gina Lin', value: 'ginaLin'},
+          {title: 'Shue Snyder', value: 'shueSnyder'},
         ],
         layout: 'radio',
-      }
+      },
+    }),
+    defineField({
+      name: 'description',
+      description: 'Anything about the artwork, mainly for SEO purposes',
+      type: 'string',
+    }),
+    defineField({
+      name: 'width_in_inches',
+      type: 'number',
+    }),
+    defineField({
+      name: 'height_in_inches',
+      type: 'number',
     }),
     defineField({
       name: 'hidden',
@@ -50,6 +56,11 @@ export const artWork = defineType({
         ],
         layout: 'radio',
       },
+    }),
+    defineField({
+      name: 'featured',
+      type: 'boolean',
+      description: 'determines whether this will be showed on the home page'
     }),
     defineField({
       name: 'price',
@@ -90,14 +101,15 @@ export const artWork = defineType({
       type: 'array',
       of: [{type: 'string'}],
       options: {
-        list: [
-          'portrait',
-          'landscape',
-          'seascape',
-          'cityscape',
-          'still life',
-          'narrative',
-        ],
+        layout: 'tags',
+      },
+    }),
+    defineField({
+      name: 'subject',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags',
       },
     }),
     defineField({

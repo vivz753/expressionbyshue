@@ -25,14 +25,19 @@ export interface Art {
 export interface ArtWork {
   title: string
   imageUrl: string // originally image but queried as imageUrl
+  artist: "ginaLin" | "shueSnyder"
   hidden: boolean
-  dimensions: "16x20" | "16x24" | "24x30" | "24x36" | "30x45" | "32x40"
+  description: string
+  width: number
+  height: number
   availability: "displayOnly" | "forSale" | "sold" | "reserved"
+  featured: boolean
   price: number
   framed: boolean
   medium: string[] // "charcoal" | "oil" | "acrylic" | "watercolor"
   support: "canvas" | "paper" | "board" | "linen" | "panel"
-  genre: string[] // "portrait" | "landscape" | "seascape" | "cityscape" | "still life" | "narrative"
+  genre: string[]
+  subject: string[]
   style: string[] // "traditional" | "impressionism" | "expressionism" | "abstract"
   orientation: "portrait" | "landscape" | "square" | "round/oval"
   dominantColor: "warmPalette" | "coldPalette" | "yellowDominant" | "redDominant" | "blueDominant" | "monochrome"

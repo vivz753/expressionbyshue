@@ -3,7 +3,7 @@ import useComponentVisible from "@src/hooks/useComponentVisible"
 import clsx from "clsx"
 import { FC, KeyboardEvent } from "react"
 
-interface Option {
+export interface Option {
   title: string
   value: string
 }
@@ -87,3 +87,23 @@ export const Dropdown: FC<React.PropsWithChildren<DropdownProps>> = ({
     </button>
   )
 }
+
+export const dominantColorOptions: Option[] = [
+  { title: "All", value: "all" },
+  { title: "Red Dominant", value: "redDominant" },
+  { title: "Yellow Dominant", value: "yellowDominant" },
+  { title: "Blue Dominant", value: "blueDominant" },
+  { title: "Monochrome", value: "monochrome" },
+  { title: "Cold Palette", value: "coldPalette" },
+  { title: "Warm Palette", value: "warmPalette" },
+]
+
+export const priceOptions: Option[] = [
+  { title: "Low to High", value: "ascending" },
+  { title: "High to Low", value: "descending" },
+]
+export const artistOptions: Option[] = [
+  { title: "All", value: "all" },
+  { title: "Gina Lin", value: "ginaLin" },
+  { title: "Shue Snyder", value: "shueSnyder" },
+]

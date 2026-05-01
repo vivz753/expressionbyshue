@@ -10,27 +10,28 @@ type NavigationLink = {
 }
 
 const labels: NavigationLink[] = [
-  { name: "portfolio", url: "/portfolio" },
-  { name: "about", url: "/about" },
-  // { name: "contact", url: "/contact" },
+  { name: "About", url: "/about" },
+  { name: "For Sale", url: "/sale" },
+  { name: "Gallery", url: "/gallery" },
+  { name: "Commissions", url: "/commissions" },
 ]
 
 const Header: FC = () => {
   return (
-    <header className="absolute top-0 z-1 flex h-[90px] w-full flex-row items-center justify-evenly lg:justify-start lg:gap-8 bg-yellow-600 lg:px-8">
-      <Link href="/">
-        <div className="relative h-[50px] w-[125px] lg:h-[100px] lg:w-[250px]">
-          <Image
-            alt="Expression by Shue"
-            fill
-            style={{ objectFit: "fill" }}
-            src={"/images/expressionbyshue-logo.png"}
-          />
+    <header className="absolute top-0 z-1 flex h-[90px] w-full flex-row items-center justify-evenly gap-2 bg-yellow-600 lg:justify-start lg:gap-8 lg:px-8">
+      <Link href="/" className="flex flex-row gap-2">
+        <div className="relative h-[35px] w-[35px] lg:h-[65px] lg:w-[65px]">
+          <Image alt="Twin Arts Studio" fill style={{ objectFit: "fill" }} src={"/images/logo_black.png"} />
+        </div>
+        <div className="flex flex-col">
+          <span className="text-sm sm:text-lg">Twin Arts Studio</span>
+          <span className="text-xs sm:block">By Gina & Shue</span>
+          <span className="hidden text-xs sm:block">Original Oil Paintings & Commissions</span>
         </div>
       </Link>
       {labels.map((label, i) => (
         <Link key={i} href={label.url}>
-          <span className="rounded-xl text-white hover:text-yellow-900">{label.name}</span>
+          <span className="sm:text-base text-xs text-white hover:text-yellow-900">{label.name}</span>
         </Link>
       ))}
     </header>
@@ -42,7 +43,7 @@ const Footer: FC = () => {
     <footer className="absolute bottom-0 z-1 flex h-[90px] w-full flex-col items-center justify-center gap-4 bg-yellow-600 md:flex-row lg:gap-8">
       <Link className="group flex flex-row items-center gap-2" href="mailto:shuesnyder@gmail.com">
         <MdOutlineMailOutline className="h-6 w-6 text-white group-hover:text-yellow-800 md:h-8 md:w-8" />
-        <span className="text-white group-hover:text-yellow-800">shuesnyder@gmail.com</span>
+        <span className="text-white group-hover:text-yellow-800">info@twinarts.studio</span>
       </Link>
       {/* <Link className="group flex flex-row items-center gap-2" href="https://instagram.com/">
         <FaInstagram className="h-6 w-6 text-white group-hover:text-yellow-800 md:h-8 md:w-8" />

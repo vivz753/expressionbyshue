@@ -1,18 +1,18 @@
 import { FC } from "react"
 import Thumbnail from "@/src/components/core/Thumbnail"
-import { Medium, Art } from "@schemas/global"
+import { ArtWork } from "@schemas/global"
 
 const Gallery: FC<{
-  setActiveProject: (artWork: Art) => void
+  setActiveProject: (artWork: ArtWork) => void
   setShowModal: (show: boolean) => void
-  projects: Art[]
-  filter: Medium | null
-}> = ({ setActiveProject, setShowModal, projects, filter }) => {
+  projects: ArtWork[]
+}> = ({ setActiveProject, setShowModal, projects }) => {
+  console.log("projects", projects)
   return (
     <div className="flex w-full flex-wrap justify-center gap-4 md:gap-10">
       {projects.map((a, i) => (
         <Thumbnail
-          highlight={a.medium === filter}
+          // highlight={a.medium === filter}
           project={a}
           key={i}
           onClick={() => {
