@@ -3,7 +3,7 @@ import Head from "next/head"
 import "../styles/globals.css"
 import Layout from "../src/components/layout"
 
-const title = "Expression by Shue"
+const title = "Twin Arts Studio"
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
