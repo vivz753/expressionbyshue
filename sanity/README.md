@@ -1,3 +1,6 @@
+# IMPORTANT
+After updating the schema in sanity/schemaTypes/artWork.ts, you also need to update web/src/sanity/artWorkQuery.ts and web/schemas/global.ts
+
 # Sanity Clean Content Studio
 
 Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
