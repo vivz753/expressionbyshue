@@ -1,5 +1,5 @@
 # IMPORTANT
-After updating the schema in sanity/schemaTypes/artWork.ts, you also need to update web/src/sanity/artWorkQuery.ts and web/schemas/global.ts
+After updating the schema in sanity/schemaTypes/artWork.ts run `pnpm deploy`, then you also need to update web/src/sanity/artWorkQuery.ts and run `pnpm deploy-graphql`. Then update web/schemas/global.ts
 
 # Sanity Clean Content Studio
 
