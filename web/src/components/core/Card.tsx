@@ -21,6 +21,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({ onClick, ar
       <div className="flex flex-col gap-4 px-6 py-4">
         <div className="flex flex-row justify-between">
           <div className="flex flex-col gap-1">
+            {a.artist && <span>{a.artist === "shueSnyder" ? "Shue Snyder" : "Gina Lin"}</span>}
             {a.medium && a.medium.length && <span className="capitalize">{a.medium.join(", ")}</span>}
           </div>
           <div className="flex flex-col gap-1">
