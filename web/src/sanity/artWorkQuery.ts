@@ -4,6 +4,7 @@ export const artWorkQuery = groq`
 *[_type=="artWork"]{
     title,
     "imageUrl": image.asset->url,
+    artist,
     hidden,
     description,
     width,
