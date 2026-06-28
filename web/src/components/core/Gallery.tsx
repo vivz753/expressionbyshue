@@ -9,7 +9,7 @@ const Gallery: FC<{
 }> = ({ setActiveProject, setShowModal, projects }) => {
   console.log("projects", projects)
   return (
-    <div className="flex w-full flex-wrap justify-center gap-4 md:gap-10">
+    <div className="flex w-full flex-wrap justify-center gap-20">
       {projects.map((a, i) => (
         <Thumbnail
           // highlight={a.medium === filter}
