@@ -14,17 +14,19 @@ const About: NextPage = () => {
   return (
     <div className="min-h-screen pt-[90px] pb-[90px]">
       <div className="flex w-screen flex-col items-center justify-center gap-12 px-12 py-12">
-        <div className="flex w-[1024px] flex-col items-center justify-center gap-12 p-12">
+        <div className="flex flex-col items-center justify-center gap-12 lg:w-[1024px] lg:p-12">
           <div className="flex max-w-full flex-col items-center gap-12 lg:flex-row lg:gap-20">
             <ShuePortrait />
             <p className="whitespace-pre-line">{shueBio}</p>
           </div>
-          <span className="h-2 w-[1024px] max-w-full rounded-full bg-orange-800" />
+          <span className="h-2 max-w-full rounded-full bg-orange-800 lg:w-[1024px]" />
           <div className="flex max-w-full flex-col items-center gap-12 lg:gap-20">
             <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-20">
               <div className="flex max-w-full flex-col items-center gap-12 lg:flex-row lg:gap-20">
                 <p className="whitespace-pre-line">{ginaBio}</p>
-                <GinaPortrait />
+                <div className="order-first lg:order-last">
+                  <GinaPortrait />
+                </div>
               </div>
             </div>
           </div>
