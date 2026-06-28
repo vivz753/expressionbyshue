@@ -19,18 +19,18 @@ const labels: NavigationLink[] = [
 const Header: FC = () => {
   return (
     <header className="absolute top-0 z-1 flex h-[90px] w-full flex-row items-center justify-evenly gap-2 bg-yellow-600 lg:justify-start lg:gap-8 lg:px-8">
-      <Link href="/" className="flex flex-row gap-2">
-        <div className="relative h-[35px] w-[35px] lg:h-[65px] lg:w-[65px]">
+      <Link href="/" className="flex flex-row items-center gap-2">
+        <div className="relative h-[50px] w-[50px] sm:h-[65px] sm:w-[65px]">
           <Image alt="Twin Arts Studio" fill style={{ objectFit: "fill" }} src={"/images/logo_black.png"} />
         </div>
-        <div className="flex flex-col">
+        <div className="hidden sm:flex flex-col">
           <span className="text-sm sm:text-lg">Twin Arts Studio</span>
           <span className="text-xs sm:block">By Gina & Shue</span>
         </div>
       </Link>
       {labels.map((label, i) => (
         <Link key={i} href={label.url}>
-          <span className="sm:text-base text-xs text-white hover:text-yellow-900">{label.name}</span>
+          <span className="sm:text-base text-sm text-white hover:text-yellow-900">{label.name}</span>
         </Link>
       ))}
     </header>
