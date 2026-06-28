@@ -21,6 +21,14 @@ export const filterBySearch = (products: ArtWork[], input: string) => {
       (product.tags &&
         product.tags?.findIndex(
           (tag) => tag.toLowerCase().startsWith(input.toLowerCase()) || input.toLowerCase().includes(tag),
+        ) !== -1) ||
+      (product.genre &&
+        product.genre?.findIndex(
+          (genre) =>
+            genre.toLowerCase().startsWith(input.toLowerCase()) ||
+            input.toLowerCase().startsWith(genre.toLowerCase()) ||
+            input.toLowerCase().includes(genre) ||
+            genre.toLowerCase().includes(input),
         ) !== -1)
       // input.toLowerCase().includes(product.artist.toLowerCase()) ||
       // product.artist.toLowerCase().startsWith(input.toLowerCase()) ||
