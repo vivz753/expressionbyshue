@@ -98,6 +98,7 @@ export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (asyn
     props: {
       artWork: availableForSaleArtWork,
     },
+    revalidate: 60, // important to revalidate cached datasets in case updates to Sanity get published
   }
 }) satisfies GetStaticProps<{
   artWork: ArtWork
