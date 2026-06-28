@@ -12,7 +12,7 @@ type NavigationLink = {
 const labels: NavigationLink[] = [
   { name: "About", url: "/about" },
   { name: "For Sale", url: "/sale" },
-  { name: "Gallery", url: "/gallery" },
+  { name: "Portfolio", url: "/portfolio" },
   { name: "Commissions", url: "/commissions" },
 ]
 

@@ -11,7 +11,7 @@ const title = `Twin Arts Studio - Home`
 const description = `
 Shue and Gina are twin sisters born in Taipei, Taiwan. Both were recognized for their artistic talent at a young age and received numerous awards in their childhood. They shared the same dream of becoming professional artists one day. However, life took them in different directions, and they set aside their artistic journey for nearly 60 years. Now, they have returned to their shared passion, creating original paintings inspired by nature, seasons, and the beauty of everyday life.
 
-Please visit the Gallery and Available for Sale  to view all artwork.  For special needs, contact info@twinart.strudio or visit Commission page. 
+Please visit the Gallery and Available for Sale  to view all artwork.  For special needs, contact info@twinart.studio or visit Commission page. 
 `
 const Home: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [activeProject, setActiveProject] = useState<ArtWork>({} as ArtWork)

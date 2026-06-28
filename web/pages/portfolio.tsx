@@ -8,7 +8,7 @@ import { SearchFilterBar } from "@src/components/core/SearchFilterBar"
 import { Card } from "@/src/components/core/Card"
 import { filterBySearch, filterByDominantColor, filterByArtist } from "@/src/helpers"
 
-const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PortfolioPage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [searchValue, setSearchValue] = useState("")
   // const [dimension, setDimension] = useState(dimensions[0])
   const [dominantColor, setDominantColor] = useState(dominantColorOptions[0])
@@ -82,7 +82,7 @@ const SalePage: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticP
   )
 }
 
-export default SalePage
+export default PortfolioPage
 
 export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork> }> = (async () => {
   const artWork = await loadArtWork()
