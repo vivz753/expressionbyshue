@@ -26,7 +26,7 @@ const Home: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticProps
       </Head>
       <div className="min-h-screen w-screen pt-[90px] pb-[90px]">
         <div className="mt-10 flex w-full max-w-full flex-col items-center justify-center gap-8 p-8">
-          <p className="text-center text-2xl font-bold">Beautiful Arts for Special Times and Places</p>
+          <p className="text-center text-2xl font-bold">Original Oil Paintings & Commissions</p>
           <p className="flex max-w-[800px] whitespace-pre-line">{description}</p>
           {/* Gallery */}
           {artWork && artWork.length > 0 && (

@@ -26,7 +26,6 @@ const Header: FC = () => {
         <div className="flex flex-col">
           <span className="text-sm sm:text-lg">Twin Arts Studio</span>
           <span className="text-xs sm:block">By Gina & Shue</span>
-          <span className="hidden text-xs sm:block">Original Oil Paintings & Commissions</span>
         </div>
       </Link>
       {labels.map((label, i) => (
