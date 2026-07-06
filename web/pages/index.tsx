@@ -29,18 +29,19 @@ const Home: NextPage<{ artWork: ArtWork[] }> = ({ artWork }: InferGetStaticProps
           <p className="flex max-w-[800px] whitespace-pre-line">{description}</p>
           {/* Gallery */}
           {artWork && artWork.length > 0 && (
-            <div className="flex h-full w-full items-center justify-center">
-              <div className="flex w-full flex-col items-center gap-4 lg:gap-10">
-                <div className="flex flex-col"></div>
-                <div className="flex h-full w-full flex-col justify-center rounded-xl py-12">
-                  <Gallery setActiveProject={setActiveProject} setShowModal={setShowModal} projects={artWork} />
+            <div className="flex w-full flex-wrap justify-center gap-20 py-10">
+              {artWork.map((a) => (
+                <div
+                  key={a.id}
+                  className="relative h-[380px] w-[380px] shrink-0 overflow-hidden rounded-md bg-yellow-600"
+                >
+                  <Image alt={a.title} src={a.imageUrl} style={{ objectFit: "contain" }} fill />
                 </div>
-              </div>
+              ))}
             </div>
           )}
         </div>
       </div>
-      <div className="flex h-full w-full flex-col justify-center gap-5 rounded-xl bg-yellow-700 p-4 pb-8 sm:p-8 lg:p-16"></div>
     </>
   )
 }
