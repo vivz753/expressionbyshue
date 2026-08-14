@@ -48,6 +48,15 @@ export const filterBySearch = (products: ArtWork[], input: string) => {
 //   return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
 // }
 
+export const filterByGenre = (products: ArtWork[], input: { title: string; value: string }) => {
+  if (input.value === "all") return products
+  return products.filter((product) => {
+    console.log("input.value", input.value)
+    console.log("product.genre", product.genre)
+    return product.genre?.includes(input.value.toLowerCase())
+  })
+}
+
 export const filterByDominantColor = (products: ArtWork[], input: { title: string; value: string }) => {
   if (input.value === "all") return products
   return products.filter((product) => product.dominantColor?.toLowerCase() === input.value.toLowerCase())
@@ -64,4 +73,11 @@ export const sortByPrice = (products: ArtWork[], input: { title: string; value: 
   } else if (input.value === "descending") {
     return products.sort((a, b) => b.price - a.price)
   }
+}
+
+export const capitalizeWords = (str: string) => {
+  return str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
 }

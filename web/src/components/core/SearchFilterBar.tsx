@@ -4,23 +4,25 @@ import { Searchbar } from "@src/components/core/Searchbar"
 export interface SearchFilterBarProps {
   searchValue: string
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
-  dominantColor?: Option
-  setDominantColor?: React.Dispatch<React.SetStateAction<Option>>
   price?: Option
   setPrice?: React.Dispatch<React.SetStateAction<Option>>
   artist: Option
   setArtist: React.Dispatch<React.SetStateAction<Option>>
+  genre: Option
+  setGenre: React.Dispatch<React.SetStateAction<Option>>
+  genreOptions: Option[]
 }
 
 export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarProps>> = ({
   searchValue,
   setSearchValue,
-  dominantColor,
-  setDominantColor,
   price,
   setPrice,
   artist,
   setArtist,
+  genre,
+  setGenre,
+  genreOptions,
 }) => {
   return (
     <div className="group sticky top-0 z-20 flex w-full justify-center bg-yellow-600">
@@ -44,14 +46,10 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
               <Dropdown setOption={(artist) => setArtist(artist)} options={artistOptions} currentOption={artist} />
             </div>
           )}
-          {dominantColor && setDominantColor && (
+          {genre && setGenre && (
             <div className="flex flex-col items-start gap-1">
-              <span className="whitespace-nowrap">Dominant Color</span>
-              <Dropdown
-                setOption={(dominantColor) => setDominantColor(dominantColor)}
-                options={dominantColorOptions}
-                currentOption={dominantColor}
-              />
+              <span className="whitespace-nowrap">Genre (in.)</span>
+              <Dropdown setOption={(genre) => setGenre(genre)} options={genreOptions} currentOption={genre} />
             </div>
           )}
           {price && setPrice && (
