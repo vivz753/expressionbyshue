@@ -62,7 +62,7 @@ const PortfolioPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
         (product) => !product.hidden,
       ),
 
-    [searchValue, artist, genres, genre, artWork],
+    [searchValue, artist, genre, artWork],
   )
 
   console.log("filteredArtwork", filteredArtwork)

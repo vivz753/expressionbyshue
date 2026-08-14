@@ -1,7 +1,7 @@
 import { loadArtWork, loadGenres } from "@sanity/loadArtWork"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import React, { useMemo, useState } from "react"
-import { priceOptions, artistOptions, genreOptions } from "@src/components/core/Dropdown"
+import { priceOptions, artistOptions } from "@src/components/core/Dropdown"
 import Modal from "@/src/components/core/Modal"
 import { ArtWork } from "@schemas/global"
 import { SearchFilterBar } from "@src/components/core/SearchFilterBar"
@@ -61,7 +61,7 @@ const SalePage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
         (product) => !product.hidden,
       ),
 
-    [genre, genres, price, artist, searchValue, artWork],
+    [genre, price, artist, searchValue, artWork],
   )
 
   console.log("filteredArtwork", filteredArtwork)
