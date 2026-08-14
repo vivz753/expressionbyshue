@@ -23,3 +23,6 @@ export const artWorkQuery = groq`
     tags,
     "id": _id,
   }`
+
+export const genreQuery = groq`
+*[_type == 'artWork'].genre`
