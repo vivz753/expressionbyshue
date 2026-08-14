@@ -23,14 +23,14 @@ const Header: FC = () => {
         <div className="relative h-[50px] w-[50px] sm:h-[65px] sm:w-[65px]">
           <Image alt="Twin Arts Studio" fill style={{ objectFit: "fill" }} src={"/images/logo_black.png"} />
         </div>
-        <div className="hidden sm:flex flex-col">
+        <div className="hidden flex-col sm:flex">
           <span className="text-sm sm:text-lg">Twin Arts Studio</span>
           <span className="text-xs sm:block">By Gina & Shue</span>
         </div>
       </Link>
       {labels.map((label, i) => (
         <Link key={i} href={label.url}>
-          <span className="sm:text-base text-sm text-white hover:text-yellow-900">{label.name}</span>
+          <span className="text-sm text-white hover:text-yellow-900 sm:text-base">{label.name}</span>
         </Link>
       ))}
     </header>
@@ -40,9 +40,13 @@ const Header: FC = () => {
 const Footer: FC = () => {
   return (
     <footer className="absolute bottom-0 z-1 flex h-[90px] w-full flex-col items-center justify-center gap-4 bg-yellow-600 md:flex-row lg:gap-8">
-      <Link className="group flex flex-row items-center gap-2" href="mailto:shuesnyder@gmail.com">
+      <Link className="group flex flex-row items-center gap-2" href="mailto:cyclingfuns@gmail.com">
         <MdOutlineMailOutline className="h-6 w-6 text-white group-hover:text-yellow-800 md:h-8 md:w-8" />
-        <span className="text-white group-hover:text-yellow-800">info@twinarts.studio</span>
+        <span className="text-white group-hover:text-yellow-800">Shue Snyder: cyclingfuns@gmail.com</span>
+      </Link>
+      <Link className="group flex flex-row items-center gap-2" href="mailto:glin1987@yahoo.com">
+        <MdOutlineMailOutline className="h-6 w-6 text-white group-hover:text-yellow-800 md:h-8 md:w-8" />
+        <span className="text-white group-hover:text-yellow-800">Gina Lin: glin1987@yahoo.com</span>
       </Link>
       {/* <Link className="group flex flex-row items-center gap-2" href="https://instagram.com/">
         <FaInstagram className="h-6 w-6 text-white group-hover:text-yellow-800 md:h-8 md:w-8" />
@@ -56,7 +60,7 @@ const Layout: FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <div className="relative flex w-full flex-col">
       <Header />
-      <div className="flex h-full min-h-screen">{children}</div>
+      <div className="flex h-full min-h-screen justify-center">{children}</div>
       <Footer />
     </div>
   )
