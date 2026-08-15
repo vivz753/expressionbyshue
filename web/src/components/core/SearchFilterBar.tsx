@@ -27,10 +27,10 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
   return (
     <div className="group sticky top-0 z-20 flex w-full justify-center bg-yellow-600">
       <div className="bg-p2 z-[1] flex w-full flex-col items-center justify-center gap-2 rounded-md p-4 py-5 text-white lg:flex-row lg:gap-10 lg:px-14">
-        <div className="flex w-full flex-col items-start gap-1">
+        {/* <div className="flex w-full flex-col items-start gap-1">
           <span>Item Name</span>
           <Searchbar className="flex w-full" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-        </div>
+        </div> */}
         <div className="flex w-full flex-row justify-between lg:w-auto lg:gap-5">
           {/* <div className="flex flex-col items-start gap-1">
 							<span className="whitespace-nowrap">Dimensions (in.)</span>
