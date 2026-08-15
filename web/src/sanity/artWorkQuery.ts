@@ -9,7 +9,6 @@ export const artWorkQuery = groq`
     description,
     "width": width_in_inches,
     "height": height_in_inches,
-    height,
     availability,
     featured,
     price,
@@ -22,6 +21,7 @@ export const artWorkQuery = groq`
     dominantColor,
     date,
     tags,
+    date,
     "id": _id,
   }`
 
