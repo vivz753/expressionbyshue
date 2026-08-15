@@ -60,7 +60,7 @@ const Layout: FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <div className="relative flex w-full flex-col">
       <Header />
-      <div className="flex h-full min-h-screen justify-center">{children}</div>
+      <div className="min-h-screen justify-center">{children}</div>
       <Footer />
     </div>
   )
