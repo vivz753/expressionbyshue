@@ -38,6 +38,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = ({ onClick, ar
             )}
           </div>
         </div>
+        {a.date && <span className="mx-auto">{a.date}</span>}
       </div>
     </li>
   )
