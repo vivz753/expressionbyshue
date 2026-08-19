@@ -116,11 +116,9 @@ export const getStaticProps: GetStaticProps<{ artWork: Array<ArtWork>; genres: s
   console.log("getStaticProps artWork:", artWork)
   console.log("getStaticProps genres:", genres)
 
-  const displayOnlyArtWork = artWork.filter((product: ArtWork) => product.availability === "displayOnly")
-  console.log("filtered by availability displayOnly:", displayOnlyArtWork)
   return {
     props: {
-      artWork: displayOnlyArtWork,
+      artWork: artWork,
       genres: genres,
     },
     revalidate: 60, // important to revalidate cached datasets in case updates to Sanity get published
