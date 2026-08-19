@@ -48,7 +48,7 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
           )}
           {genre && setGenre && (
             <div className="flex flex-col items-start gap-1">
-              <span className="whitespace-nowrap">Genre (in.)</span>
+              <span className="whitespace-nowrap">Genre</span>
               <Dropdown setOption={(genre) => setGenre(genre)} options={genreOptions} currentOption={genre} />
             </div>
           )}
