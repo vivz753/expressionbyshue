@@ -107,3 +107,10 @@ export const artistOptions: Option[] = [
   { title: "Gina Lin", value: "ginaLin" },
   { title: "Shue Snyder", value: "shueSnyder" },
 ]
+export const availabilityOptions: Option[] = [
+  { title: "All", value: "all" },
+  { title: "Display Only", value: "displayOnly" },
+  { title: "For Sale", value: "forSale" },
+  { title: "Sold", value: "sold" },
+  { title: "Reserved", value: "reserved" },
+]

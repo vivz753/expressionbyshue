@@ -48,11 +48,18 @@ export const filterBySearch = (products: ArtWork[], input: string) => {
 //   return products.filter((product) => product.dimensions.toLowerCase() === input.value.toLowerCase())
 // }
 
+export const filterByAvailability = (products: ArtWork[], input: { title: string; value: string }) => {
+  if (input.value === "all") return products
+
+  const filtered = products.filter((product) => {
+    return product.availability === input.value // IMPORTANT: do not use toLowerCase() for input.value
+  })
+  return filtered
+}
+
 export const filterByGenre = (products: ArtWork[], input: { title: string; value: string }) => {
   if (input.value === "all") return products
   return products.filter((product) => {
-    console.log("input.value", input.value)
-    console.log("product.genre", product.genre)
     return product.genre?.includes(input.value.toLowerCase())
   })
 }

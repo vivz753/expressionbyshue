@@ -1,9 +1,18 @@
-import { Dropdown, Option, priceOptions, dominantColorOptions, artistOptions } from "@src/components/core/Dropdown"
+import {
+  Dropdown,
+  Option,
+  priceOptions,
+  dominantColorOptions,
+  artistOptions,
+  availabilityOptions,
+} from "@src/components/core/Dropdown"
 import { Searchbar } from "@src/components/core/Searchbar"
 
 export interface SearchFilterBarProps {
   searchValue: string
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
+  availability?: Option
+  setAvailability?: React.Dispatch<React.SetStateAction<Option>>
   price?: Option
   setPrice?: React.Dispatch<React.SetStateAction<Option>>
   artist: Option
@@ -16,6 +25,8 @@ export interface SearchFilterBarProps {
 export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarProps>> = ({
   searchValue,
   setSearchValue,
+  availability,
+  setAvailability,
   price,
   setPrice,
   artist,
@@ -32,14 +43,16 @@ export const SearchFilterBar: React.FC<React.PropsWithChildren<SearchFilterBarPr
           <Searchbar className="flex w-full" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
         </div> */}
         <div className="flex w-full flex-row justify-between lg:w-auto lg:gap-5">
-          {/* <div className="flex flex-col items-start gap-1">
-							<span className="whitespace-nowrap">Dimensions (in.)</span>
-							<Dropdown
-								setOption={(dimension) => setDimension(dimension)}
-								options={dimensions}
-								currentOption={dimension}
-							/>
-						</div> */}
+          {availability && setAvailability && (
+            <div className="flex flex-col items-start gap-1">
+              <span className="whitespace-nowrap">Availability</span>
+              <Dropdown
+                setOption={(availability) => setAvailability(availability)}
+                options={availabilityOptions}
+                currentOption={availability}
+              />
+            </div>
+          )}
           {artist && setArtist && (
             <div className="flex flex-col items-start gap-1">
               <span className="whitespace-nowrap">Artist</span>

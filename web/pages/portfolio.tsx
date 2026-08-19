@@ -1,12 +1,12 @@
 import { loadArtWork, loadGenres } from "@sanity/loadArtWork"
 import { ArtWork } from "@schemas/global"
-import { artistOptions } from "@src/components/core/Dropdown"
+import { artistOptions, availabilityOptions } from "@src/components/core/Dropdown"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import { useMemo, useState } from "react"
 import Modal from "@/src/components/core/Modal"
 import { SearchFilterBar } from "@src/components/core/SearchFilterBar"
 import { Card } from "@/src/components/core/Card"
-import { filterBySearch, filterByGenre, filterByArtist, capitalizeWords } from "@/src/helpers"
+import { filterByAvailability, filterBySearch, filterByGenre, filterByArtist, capitalizeWords } from "@/src/helpers"
 
 const PortfolioPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
   artWork,
@@ -37,6 +37,7 @@ const PortfolioPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
   const [searchValue, setSearchValue] = useState("")
   const [artist, setArtist] = useState(artistOptions[0])
   const [genre, setGenre] = useState(genreOptions[0])
+  const [availability, setAvailability] = useState(availabilityOptions[0])
 
   const [activeWork, setActiveWork] = useState<ArtWork>(artWork[0])
   const [showModal, setShowModal] = useState(false)
@@ -58,11 +59,12 @@ const PortfolioPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
     () =>
       // TODO: consider swapping order of filters to improve perf
 
-      filterByGenre(filterByArtist(filterBySearch(artWork, searchValue), artist), genre)?.filter(
-        (product) => !product.hidden,
-      ),
+      filterByGenre(
+        filterByAvailability(filterByArtist(filterBySearch(artWork, searchValue), artist), availability),
+        genre,
+      )?.filter((product) => !product.hidden),
 
-    [searchValue, artist, genre, artWork],
+    [availability, searchValue, artist, genre, artWork],
   )
 
   console.log("filteredArtwork", filteredArtwork)
@@ -72,6 +74,8 @@ const PortfolioPage: NextPage<{ artWork: ArtWork[]; genres: string[] }> = ({
       <SearchFilterBar
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        availability={availability}
+        setAvailability={setAvailability}
         artist={artist}
         setArtist={setArtist}
         genre={genre}
